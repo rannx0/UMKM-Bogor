@@ -37,7 +37,10 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item">
                         <i class="fas fa-power-off text-primary"></i>
-                        Logout
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
                     </a>
                 </div>
             </li>
