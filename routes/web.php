@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['middleware' => ['role:superadmin']], function () {
+    Route::get('/superadmin', [SuperadminController::class, 'index'])->name('superadmin.dashboard');
+});
+
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+});
