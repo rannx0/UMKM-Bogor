@@ -8,6 +8,6 @@ class SuperAdminController extends Controller
 {
     public function index()
     {
-        return view('admin.superadmin');
+        return view('backend.superadmin.dashboard');
     }
 }

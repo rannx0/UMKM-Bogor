@@ -1,51 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    
+<!-- Mirrored from coderthemes.com/hyper/saas/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Jul 2022 10:21:17 GMT -->
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@yield('title')</title>
+        <title>@yield('title')</title>
 
-    <!-- backend/includes/head -->
-    @include('admin.includes.head')
+        @include('backend.includes.head')
 
-    <!-- backend/yield/style -->
-    @yield('styles')
+        @yield('styles')
+    </head>
 
-</head>
+    <body class="loading" data-layout-color="light" data-leftbar-theme="dark" data-layout-mode="fluid" data-rightbar-onstart="true">
+        <!-- Begin page -->
+        <div class="wrapper">
 
-<body>
-    <div class="container-scroller">
-        <!-- backend/includes/navbar -->
-        @include('admin.includes.navbar')
-        <!-- partial -->
-        <div class="container-fluid page-body-wrapper">
-            <!-- backend/includes/right-panel -->
-            @include('admin.includes.right-panel')
-            <!-- partial -->
-            <!-- backend/includes/sidebar -->
-            @include('admin.includes.sidebar')
-            <!-- partial -->
-            <div class="main-panel">
-                <div class="content-wrapper">
-                    @yield('content')
-                </div>
-                <!-- content-wrapper ends -->
-                <!-- backend/includes/footer -->
-                @include('admin.includes.footer')
-                <!-- partial -->
+            @include('backend.includes.sidebar')
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+                <div class="content">
+
+                    @include('backend.includes.navbar')
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        @yield('content')
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                @include('backend.includes.footer')
+                <!-- end Footer -->
+
             </div>
-            <!-- main-panel ends -->
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+
         </div>
-        <!-- page-body-wrapper ends -->
-    </div>
-    <!-- backend/includes/Script -->
-    @include('admin.includes.script')
-    @yield('scripts')
-</body>
+        <!-- END wrapper -->
 
 
-<!-- Mirrored from www.urbanui.com/melody/template/pages/samples/blank-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:54 GMT -->
-
+        @include('backend.includes.script')
+        
+    </body>
 </html>

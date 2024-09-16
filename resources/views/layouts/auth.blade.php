@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Mirrored from coderthemes.com/hyper/saas/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Jul 2022 10:21:17 GMT -->
+
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
 
-    <!-- backend/includes/head -->
-    @include('admin.includes.head')
-
-    <!-- backend/yield/style -->
-    @yield('styles')
+    @include('auth.includes.head')
 
 </head>
 
-<body>
-    <div class="container-scroller">
-        @yield('content')
-    </div>
-    <!-- backend/includes/Script -->
-    @include('admin.includes.script')
-    @yield('scripts')
+<body class="loading authentication-bg" data-layout-config='{"darkMode":false}'>
+    <!-- Begin page -->
+    @yield('content')
+    <!-- end page -->
+    <!-- END wrapper -->
+
+
+    @include('auth.includes.script')
+
 </body>
-
-
-<!-- Mirrored from www.urbanui.com/melody/template/pages/samples/blank-page.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 15 Sep 2018 06:08:54 GMT -->
 
 </html>

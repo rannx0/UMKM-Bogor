@@ -27,7 +27,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.dashboard');
 });
 
 Route::group(['middleware' => ['role:superadmin']], function () {

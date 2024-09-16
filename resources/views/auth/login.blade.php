@@ -1,63 +1,70 @@
 <!-- resources/views/auth/login.blade.php -->
 @extends('layouts.auth')
 
+@section('title', 'Login')
+
 @section('content')
-<div class="container-fluid page-body-wrapper full-page-wrapper">
-    <div class="content-wrapper d-flex align-items-center auth auth-img-bg">
-        <div class="row w-100">
-            <div class="col-lg-4 mx-auto">
-                <div class="auth-form-light text-left p-5">
-                    <div class="row">
-                        <div class="brand-logo">
-                            <i class="fa fa-user-circle fa-5x"></i>
-                        </div>
-                        <div class="mt-4 ml-1 text-center">
-                            <h4>Hello! Let's get started</h4>
-                        </div>
+<div class="account-pages pt-2 pt-sm-5 pb-4 pb-sm-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xxl-4 col-lg-5">
+                <div class="card">
+
+                    <!-- Logo -->
+                    <div class="card-header pt-4 pb-4 text-center bg-primary">
+                        <a href="{{ url('/') }}">
+                            <span><img src="{{ asset('assets/images/logo.png') }}" alt="" height="18"></span>
+                        </a>
                     </div>
 
-                    <form class="pt-3" method="POST" action="{{ route('login.submit') }}">
-                        @csrf
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend bg-transparent">
-                                    <span class="input-group-text bg-transparent border-right-0">
-                                        <i class="fa fa-user text-primary"></i>
-                                    </span>
+                    <div class="card-body p-4">
+                        
+                        <div class="text-center w-75 m-auto">
+                            <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
+                            <p class="text-muted mb-4">Enter your email address and password to access admin panel.</p>
+                        </div>
+
+                        <!-- Form Login -->
+                        <form action="{{ route('login.submit') }}" method="POST">
+                            @csrf
+
+                            <div class="mb-3">
+                                <label for="emailaddress" class="form-label">Email address</label>
+                                <input class="form-control" type="email" id="emailaddress" name="email" required placeholder="Enter your email">
+                            </div>
+
+                            <div class="mb-3">
+                                <a href="#" class="text-muted float-end"><small>Forgot your password?</small></a>
+                                <label for="password" class="form-label">Password</label>
+                                <div class="input-group input-group-merge">
+                                    <input type="password" id="password" name="password" class="form-control" required placeholder="Enter your password">
+                                    <div class="input-group-text">
+                                        <span class="password-eye"></span>
+                                    </div>
                                 </div>
-                                <input type="email" class="form-control form-control-lg" name="email"
-                                    id="exampleInputEmail1" placeholder="Email" required>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend bg-transparent">
-                                    <span class="input-group-text bg-transparent border-right-0">
-                                        <i class="fa fa-lock text-primary"></i>
-                                    </span>
+
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="checkbox-signin" name="remember">
+                                    <label class="form-check-label" for="checkbox-signin">Remember me</label>
                                 </div>
-                                <input type="password" class="form-control form-control-lg" name="password"
-                                    id="exampleInputPassword1" placeholder="Password" required>
                             </div>
-                        </div>
-                        <div class="mt-3">
-                            <button type="submit" class="btn btn-block btn-primary">
-                                SIGN IN
-                            </button>
-                        </div>
-                        <div class="my-2 d-flex justify-content-between align-items-center">
-                            <div class="form-check">
-                                <label class="form-check-label text-muted">
-                                    <input type="checkbox" class="form-check-input" name="remember">
-                                    Keep me signed in
-                                </label>
+
+                            <div class="mb-3 text-center">
+                                <button class="btn btn-primary" type="submit"> Log In </button>
                             </div>
-                        </div>
-                    </form>
+
+                        </form>
+                    </div> <!-- end card-body -->
                 </div>
-            </div>
+                <!-- end card -->
+                <!-- end row -->
+
+            </div> <!-- end col -->
         </div>
+        <!-- end row -->
     </div>
-    <!-- content-wrapper ends -->
+    <!-- end container -->
 </div>
 @endsection
