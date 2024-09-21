@@ -35,6 +35,26 @@
                             </a>
                         </li>
 
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarNotification" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-bell"></i>
+                                <span>Notification </span>
+                            </a>
+                            <div class="collapse" id="sidebarNotification">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="#">New Users</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">User Changes</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Massage</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
                         <li class="side-nav-title side-nav-item">Apps</li>
 
                         <li class="side-nav-item">
@@ -51,13 +71,38 @@
                             </a>
                         </li>
 
+                        <li class="side-nav-title side-nav-item">Database</li>
+
                         <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarCrm" aria-expanded="false" aria-controls="sidebarCrm" class="side-nav-link">
+                            <a data-bs-toggle="collapse" href="#sidebarUmkm" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-padlock"></i>
+                                <span>Data Umkm </span>
+                            </a>
+                            <div class="collapse" id="sidebarUmkm">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="crm-dashboard.html">Data Pengguna</a>
+                                    </li>
+                                    <li>
+                                        <a href="crm-projects.html">Kategori Usaha</a>
+                                    </li>
+                                    <li>
+                                        <a href="crm-orders-list.html">Data Keuangan</a>
+                                    </li>
+                                    <li>
+                                        <a href="crm-orders-list.html">Data Lokasi</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarLocations" aria-expanded="false" aria-controls="sidebarCrm" class="side-nav-link">
                                 <i class="uil uil-tachometer-fast"></i>
                                 <span class="badge bg-danger text-white float-end">New</span>
-                                <span> Locations </span>
+                                <span>Data Locations </span>
                             </a>
-                            <div class="collapse" id="sidebarCrm">
+                            <div class="collapse" id="sidebarLocations">
                                 <ul class="side-nav-second-level">
                                     <li>
                                         <a href="crm-dashboard.html">Provinsi</a>
@@ -67,12 +112,6 @@
                                     </li>
                                     <li>
                                         <a href="crm-orders-list.html">Kecamatan</a>
-                                    </li>
-                                    <li>
-                                        <a href="crm-clients.html">Clients</a>
-                                    </li>
-                                    <li>
-                                        <a href="crm-management.html">Management</a>
                                     </li>
                                 </ul>
                             </div>

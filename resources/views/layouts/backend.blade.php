@@ -50,6 +50,7 @@
 
 
         @include('backend.includes.script')
+        @yield('scripts')
         
     </body>
 </html>
