@@ -16,33 +16,33 @@ class AuthController extends Controller
     // Proses login
     public function login(Request $request)
     {
+        // Validasi input login
         $request->validate([
             'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
 
-        // Cek kredensial
-        if (Auth::attempt([
-            'email' => $request->input('email'),
-            'password' => $request->input('password'),
-        ])) {
-            // Login sukses, redirect ke halaman yang diinginkan
+        // Cek kredensial dan ingat pengguna jika opsi remember dipilih
+        $credentials = $request->only('email', 'password');
+        $remember = $request->has('remember'); // Untuk checkbox "Remember me"
+
+        if (Auth::attempt($credentials, $remember)) {
+            // Login sukses, redirect berdasarkan role pengguna
             $user = Auth::user();
 
-            // Redirect berdasarkan role
             if ($user->hasRole('superadmin')) {
                 return redirect()->route('superadmin.dashboard');
             } elseif ($user->hasRole('admin')) {
                 return redirect()->route('admin.dashboard');
             } else {
-                return redirect()->route('home');
+                return redirect()->route('home'); // Redirect ke halaman umum untuk user biasa
             }
         }
 
-        // Jika gagal login
+        // Jika gagal login, kembalikan dengan pesan error
         return redirect()->back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
-        ]);
+        ])->withInput(); // Agar input tetap terisi
     }
 
     // Logout user
@@ -52,4 +52,3 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 }
-

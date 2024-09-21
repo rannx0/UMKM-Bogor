@@ -29,38 +29,44 @@
                         <li class="side-nav-title side-nav-item">Navigation</li>
 
                         <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <a data-bs-toggle="collapse" href="#" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
-                                <span class="badge bg-success float-end">4</span>
-                                <span> Dashboards </span>
+                                <span>Dashboards </span>
                             </a>
-                            <div class="collapse" id="sidebarDashboards">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a href="dashboard-analytics.html">Analytics</a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
 
                         <li class="side-nav-title side-nav-item">Apps</li>
 
                         <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="dripicons-gear"></i>
+                                <span>Configuration </span>
+                            </a>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                                <i class="uil-padlock"></i>
+                                <span>Permissions </span>
+                            </a>
+                        </li>
+
+                        <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarCrm" aria-expanded="false" aria-controls="sidebarCrm" class="side-nav-link">
                                 <i class="uil uil-tachometer-fast"></i>
                                 <span class="badge bg-danger text-white float-end">New</span>
-                                <span> CRM </span>
+                                <span> Locations </span>
                             </a>
                             <div class="collapse" id="sidebarCrm">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="crm-dashboard.html">Dashboard</a>
+                                        <a href="crm-dashboard.html">Provinsi</a>
                                     </li>
                                     <li>
-                                        <a href="crm-projects.html">Project</a>
+                                        <a href="crm-projects.html">Kota</a>
                                     </li>
                                     <li>
-                                        <a href="crm-orders-list.html">Orders List</a>
+                                        <a href="crm-orders-list.html">Kecamatan</a>
                                     </li>
                                     <li>
                                         <a href="crm-clients.html">Clients</a>
@@ -73,17 +79,6 @@
                         </li>
                     </ul>
 
-                    <!-- Help Box -->
-                    {{-- <div class="help-box text-white text-center">
-                        <a href="javascript: void(0);" class="float-end close-btn text-white">
-                            <i class="mdi mdi-close"></i>
-                        </a>
-                        <img src="assets/images/help-icon.svg" height="90" alt="Helper Icon Image" />
-                        <h5 class="mt-3">Unlimited Access</h5>
-                        <p class="mb-3">Upgrade to plan to get access to unlimited reports</p>
-                        <a href="javascript: void(0);" class="btn btn-secondary btn-sm">Upgrade</a>
-                    </div> --}}
-                    <!-- end Help Box -->
                     <!-- End Sidebar -->
 
                     <div class="clearfix"></div>

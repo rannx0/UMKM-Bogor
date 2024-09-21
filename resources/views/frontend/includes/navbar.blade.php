@@ -1,5 +1,5 @@
         <!-- NAVBAR START -->
-        <nav class="navbar navbar-expand-lg py-lg-3 navbar-dark">
+        <nav class="navbar navbar-expand-lg py-lg-3 navbar-dark position-fixed">
             <div class="container">
 
                 <!-- logo -->

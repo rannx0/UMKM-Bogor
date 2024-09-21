@@ -5,7 +5,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,23 +16,23 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-// Tampilkan formulir login
+// login
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-
-// Proses login
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
-
 // Logout
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Halaman frontend dashboard yang bisa diakses oleh siapa saja
 Route::get('/', function () {
     return view('frontend.dashboard');
 });
 
-Route::group(['middleware' => ['role:superadmin']], function () {
-    Route::get('/superadmin', [SuperadminController::class, 'index'])->name('superadmin.dashboard');
+// Rute untuk Superadmin, hanya bisa diakses oleh pengguna dengan role 'superadmin'
+Route::group(['middleware' => ['auth', 'role:superadmin']], function () {
+    Route::get('/superadmin', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
 });
 
-Route::group(['middleware' => ['role:admin']], function () {
+// Rute untuk Admin, hanya bisa diakses oleh pengguna dengan role 'admin'
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 });
