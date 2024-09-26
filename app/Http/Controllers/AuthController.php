@@ -22,21 +22,33 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        // Cek kredensial dan ingat pengguna jika opsi remember dipilih
+        // Ambil kredensial dan ingat pengguna jika opsi "remember me" dipilih
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember'); // Untuk checkbox "Remember me"
 
         if (Auth::attempt($credentials, $remember)) {
-            // Login sukses, redirect berdasarkan role pengguna
+            // Login sukses, ambil user yang sedang login
             $user = Auth::user();
 
-            if ($user->hasRole('superadmin')) {
+            // Cek role pengguna dan redirect ke halaman yang sesuai
+            if ($user->hasRole('Superadmin')) {
                 return redirect()->route('superadmin.dashboard');
-            } elseif ($user->hasRole('admin')) {
+            } elseif ($user->hasRole('Admin')) {
                 return redirect()->route('admin.dashboard');
-            } else {
+            } elseif ($user->hasRole('Manager')) {
+                return redirect()->route('manager.dashboard');
+            } elseif ($user->hasRole('Administrator')) {
+                return redirect()->route('administrator.dashboard');
+            } elseif ($user->hasRole('CEO')) {
+                return redirect()->route('ceo.dashboard');
+            } elseif ($user->hasRole('UMKM Management')) {
+                return redirect()->route('umkm-management.dashboard');
+            } elseif ($user->hasRole('Configurations Management')) {
+                return redirect()->route('config-management.dashboard');
+            } elseif ($user->hasRole('User')) {
                 return redirect()->route('home'); // Redirect ke halaman umum untuk user biasa
             }
+            
         }
 
         // Jika gagal login, kembalikan dengan pesan error

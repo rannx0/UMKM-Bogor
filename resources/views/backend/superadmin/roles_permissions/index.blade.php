@@ -1,62 +1,41 @@
 @extends('layouts.backend')
 
-@section('title', 'Manage Roles and Permissions')
-
 @section('content')
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title">Roles and Permissions Management</h4>
-                    <a href="{{ route('roles.create') }}" class="btn btn-primary float-end">Add New Role</a>
-                </div>
-                <div class="card-body">
-                    <!-- Flash Message -->
-                    @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-
-                    <!-- Role Table -->
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Role Name</th>
-                                <th>Permissions</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($roles as $role)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $role->name }}</td>
-                                    <td>
-                                        @foreach ($role->permissions as $permission)
-                                            <span class="badge bg-info">{{ $permission->name }}</span>
-                                        @endforeach
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline-block;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                    <!-- Pagination -->
-                    {{ $roles->links() }}
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <h1 class="header-title mt-3">Admin List</h1>
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+    <a href="{{ route('admins.create') }}" class="btn btn-primary my-1">Create Admin</a>
+    <div class="card-body shadow-sm mt-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($admins as $admin)
+                    <tr>
+                        <td>{{ $admin->name }}</td>
+                        <td>{{ $admin->email }}</td>
+                        <td>{{ $admin->roles->pluck('name')->implode(', ') }}</td>
+                        <td>
+                            <a href="{{ route('admins.edit', $admin) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('admins.destroy', $admin) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
+
 </div>
 @endsection

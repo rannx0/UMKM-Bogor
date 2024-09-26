@@ -5,6 +5,14 @@
 @section('content')
 <!-- START HERO -->
 <section class="hero-section">
+    <a href="#" class="dropdown-item notify-item"
+    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <i class="mdi mdi-logout me-1"></i>
+    <span>Logout</span>
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-5">

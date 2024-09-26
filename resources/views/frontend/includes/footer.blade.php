@@ -3,7 +3,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
-                        <img src="assets/images/logo.png" alt="" class="logo-dark" height="18" />
+                        <img src="assets/images/logo.png" alt="" class="logo-dark" height="30" />
                         <p class="text-muted mt-4">Hyper makes it easier to build better websites with
                             <br> great speed. Save hundreds of hours of design
                             <br> and development by using it.</p>

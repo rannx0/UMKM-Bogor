@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class DatabaseSeeder extends Seeder
@@ -14,19 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $superadminRole = Role::where('name', 'superadmin')->first();
-        $adminRole = Role::where('name', 'admin')->first();
-    
-        User::create([
+        // Superadmin
+        $superadmin = User::firstOrCreate([
             'name' => 'Superadmin',
             'email' => 'superadmin@umkm.com',
-            'password' => bcrypt('superadmin@umkm.com'),
-        ])->assignRole($superadminRole);
-    
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@umkm.com',
-            'password' => bcrypt('admin@umkm.com'),
-        ])->assignRole($adminRole);
+        ], [
+            'password' => Hash::make('superadmin@umkm.com'), // Ganti password sesuai kebutuhan
+        ]);
+        $superadmin->assignRole('Superadmin');
     }
 }
