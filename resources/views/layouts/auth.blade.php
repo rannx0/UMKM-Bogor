@@ -7,10 +7,10 @@
     <title>@yield('title')</title>
 
     @include('auth.includes.head')
-
+    @yield('styles')
 </head>
 
-<body class="loading authentication-bg" data-layout-config='{"darkMode":false}'>
+<body class="loading authentication-bg" data-layout-config='{"darkMode":false}' >
     <!-- Begin page -->
     @yield('content')
     <!-- end page -->
@@ -19,6 +19,7 @@
 
     @include('auth.includes.script')
 
+    @yield('scripts')
 </body>
 
 </html>

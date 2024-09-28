@@ -24,6 +24,11 @@ class Usaha extends Model
         'rw',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function keuangan()
     {
         return $this->hasOne(Keuangan::class);

@@ -40,9 +40,8 @@
             <!-- right menu -->
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item me-0">
-                    <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/" target="_blank" class="nav-link d-lg-none">Purchase now</a>
-                    <a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/" target="_blank" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
-                        <i class="mdi mdi-basket me-2"></i> Purchase Now
+                    <a href="#" target="_blank" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
+                        <i class="mdi mdi-basket me-2"></i> Register UMKM
                     </a>
                 </li>
             </ul>

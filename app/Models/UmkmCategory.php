@@ -9,7 +9,10 @@ class UmkmCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'nama',
-    ];
+    protected $fillable = ['nama'];
+
+    public function usaha()
+    {
+        return $this->hasMany(Usaha::class);
+    }
 }

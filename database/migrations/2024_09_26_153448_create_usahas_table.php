@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nama_usaha');
             $table->string('nib')->nullable();
             $table->text('deskripsi_usaha');
-            $table->foreignId('kategori_umkm')->constrained('umkm_category')->onDelete('cascade');
+            $table->foreignId('kategori_umkm')->constrained('umkm_categories')->onDelete('cascade');
             $table->date('tanggal_berdiri');
             $table->text('alamat_usaha');
             $table->string('kordinat_usaha');

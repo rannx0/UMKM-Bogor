@@ -146,7 +146,7 @@
                                         <a href="crm-dashboard.html">Data Pengguna</a>
                                     </li>
                                     <li>
-                                        <a href="crm-projects.html">Kategori Usaha</a>
+                                        <a href="{{ route('umkm-categories.index')}}">Kategori Usaha</a>
                                     </li>
                                     <li>
                                         <a href="crm-orders-list.html">Data Keuangan</a>
@@ -161,21 +161,26 @@
                         <li class="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarLocations" aria-expanded="false" aria-controls="sidebarCrm" class="side-nav-link">
                                 <i class="uil uil-tachometer-fast"></i>
-                                <span class="badge bg-danger text-white float-end">New</span>
                                 <span>Data Locations </span>
                             </a>
                             <div class="collapse" id="sidebarLocations">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="crm-dashboard.html">Provinsi</a>
+                                        <a href="{{ route('lokasi')}}">Database</a>
                                     </li>
                                     <li>
-                                        <a href="crm-projects.html">Kota</a>
+                                        <a href="{{ route('provinsi.index') }}">Provinsi</a>
                                     </li>
                                     <li>
-                                        <a href="crm-orders-list.html">Kecamatan</a>
+                                        <a href="{{ route('kabupaten_kota.index')}}">Kota</a>
                                     </li>
-                                </ul>
+                                    <li>
+                                        <a href="{{ route('kecamatan.index') }}">Kecamatan</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('kelurahan.index') }}">Kelurahan</a>
+                                    </li>
+                                </ul>   
                             </div>
                         </li>
                     </ul>

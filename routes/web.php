@@ -5,6 +5,13 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminManageController;
+use App\Http\Controllers\RegisterUMKMController;
+use App\Http\Controllers\ProvinsiController;
+use App\Http\Controllers\KabupatenKotaController;
+use App\Http\Controllers\KecamatanController;
+use App\Http\Controllers\KelurahanController;
+use App\Http\Controllers\LocationsController;
+use App\Http\Controllers\UmkmCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,11 +31,23 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 // Logout Route
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Register Routes
+Route::get('/register', 'RegisterUMKMController@showUserForm')->name('register');
+Route::post('/register-user', 'RegisterUMKMController@registerUser')->name('registerUser');
+Route::post('/register-personal-data', 'RegisterUMKMController@registerPersonalData')->name('registerPersonalData');
+
 // Halaman frontend dashboard yang bisa diakses oleh siapa saja
 Route::get('/', function () {
     return view('frontend.dashboard');
 })->name('home');
 
+Route::get('/register-desain', function () {
+    return view('frontend.pages.register.multi-step-register');
+})->name('regis');
+
+Route::get('/register-desain-2', function () {
+    return view('frontend.pages.register.step-2-register');
+})->name('regis2');
 // Superadmin Routes - Only accessible by users with 'Superadmin' role
 Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
@@ -43,6 +62,16 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
 
     // Permissions Management
     Route::get('/permissions', [AdminManageController::class, 'listPermissions'])->name('permissions.index');
+
+    // Locations Manage
+    Route::get('/lokasi', [LocationsController::class, 'index'])->name('lokasi');
+    Route::resource('provinsi', ProvinsiController::class);
+    Route::resource('kabupaten_kota', KabupatenKotaController::class);
+    Route::resource('kecamatan', KecamatanController::class);
+    Route::resource('kelurahan', KelurahanController::class);
+
+    // UMKM Category
+    Route::resource('umkm-categories', UmkmCategoryController::class);
 });
 
 // Manager Routes - Only for 'Manager' role
