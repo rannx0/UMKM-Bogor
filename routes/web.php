@@ -32,22 +32,22 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Register Routes
-Route::get('/register', 'RegisterUMKMController@showUserForm')->name('register');
-Route::post('/register-user', 'RegisterUMKMController@registerUser')->name('registerUser');
-Route::post('/register-personal-data', 'RegisterUMKMController@registerPersonalData')->name('registerPersonalData');
+Route::get('/register', [RegisterUMKMController::class, 'showForm'])->name('register');
+Route::post('/register/step', [RegisterUMKMController::class, 'handleStep'])->name('register.step');
+// Register Locations
+Route::get('/get-kabupaten-kota', [RegisterUMKMController::class, 'getKabupatenKota'])->name('get.kabupaten.kota');
+Route::get('/get-kecamatan', [RegisterUMKMController::class, 'getKecamatan'])->name('get.kecamatan');
+Route::get('/get-kelurahan', [RegisterUMKMController::class, 'getKelurahan'])->name('get.kelurahan');
 
 // Halaman frontend dashboard yang bisa diakses oleh siapa saja
 Route::get('/', function () {
     return view('frontend.dashboard');
 })->name('home');
 
-Route::get('/register-desain', function () {
-    return view('frontend.pages.register.multi-step-register');
-})->name('regis');
+// Route::get('/register-desain', function () {
+//     return view('frontend.pages.register.multi-step-register');
+// })->name('regis');
 
-Route::get('/register-desain-2', function () {
-    return view('frontend.pages.register.step-2-register');
-})->name('regis2');
 // Superadmin Routes - Only accessible by users with 'Superadmin' role
 Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');

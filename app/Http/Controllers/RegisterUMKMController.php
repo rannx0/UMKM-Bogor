@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\PersonalData;
+use App\Models\Provinsi;
+use App\Models\KabupatenKota;
+use App\Models\Kecamatan;
+use App\Models\Kelurahan;
 use App\Models\Usaha;
 use App\Models\Keuangan;
 use Illuminate\Http\Request;
@@ -12,130 +16,136 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterUMKMController extends Controller
 {
-    public function showUserForm()
+    public function showForm()
     {
-        return view('register'); // assumes register.blade.php is in the views directory
+        $provinsi = Provinsi::all();
+        return view('frontend.register.umkm-register', compact('provinsi')); // Ganti dengan nama view yang sesuai
     }
 
-    public function registerUser(Request $request)
+    public function handleStep(Request $request)
     {
-        // Validate user input
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required',
+        $step = $request->input('step');
+
+        switch ($step) {
+            case 1:
+                return $this->handleAccountStep($request);
+            case 2:
+                return $this->handlePersonalDataStep($request);
+            case 3:
+                return $this->handleUmkmDataStep($request);
+            default:
+                return response()->json(['success' => false, 'message' => 'Invalid step']);
+        }
+    }
+
+    public function getKabupatenKota(Request $request)
+    {
+        $provinsi_id = $request->input('provinsi_id');
+        $kabupaten_kota = KabupatenKota::where('provinsi_id', $provinsi_id)->get();
+        return response()->json($kabupaten_kota);
+    }
+
+    public function getKecamatan(Request $request)
+    {
+        $kabupaten_kota_id = $request->input('kabupaten_kota_id');
+        $kecamatan = Kecamatan::where('kabupaten_kota_id', $kabupaten_kota_id)->get();
+        return response()->json($kecamatan);
+    }
+
+    public function getKelurahan(Request $request)
+    {
+        $kecamatan_id = $request->input('kecamatan_id');
+        $kelurahan = Kelurahan::where('kecamatan_id', $kecamatan_id)->get();
+        return response()->json($kelurahan);
+    }
+
+
+    protected function handleAccountStep(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6',
         ]);
 
-        // Create a new user
-        $user = new User();
-        $user->name = $validatedData['name'];
-        $user->email = $validatedData['email'];
-        $user->password = bcrypt($validatedData['password']);
-        $user->save();
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
 
-        // Return the user ID to the JavaScript code
-        return response()->json(['user_id' => $user->id]);
+        // Simpan data step 1 ke session
+        $request->session()->put('register.account', $request->only('username', 'email', 'password'));
+
+        return response()->json(['success' => true, 'step' => 2]);
     }
 
-    public function registerPersonalData(Request $request)
+    protected function handlePersonalDataStep(Request $request)
     {
-        // Validate personal data input
-        $validatedData = $request->validate([
-            'nama_lengkap' => 'required|string',
-            'nik' => 'required|string',
-            'tempat_lahir' => 'required|string',
+        $validator = Validator::make($request->all(), [
+            'nama_lengkap' => 'required|string|max:100',
+            'nik' => 'required|string|max:16|unique:personal_data,nik',
+            'tempat_lahir' => 'required|string|max:50',
             'tanggal_lahir' => 'required|date',
-            'jenis_kelamin' => 'required|string',
-            'nomor_telepon' => 'required|string',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+            'nomor_telepon' => 'required|string|max:15',
+            'provinsi_id' => 'required|integer|exists:provinsis,id',
+            'kabupaten_kota_id' => 'required|integer|exists:kabupaten_kotas,id',
+            'kecamatan_id' => 'required|integer|exists:kecamatans,id',
+            'kelurahan_id' => 'required|integer|exists:kelurahans,id',
+            'alamat' => 'required|string|max:100',
         ]);
-
-        // Create a new personal data record
-        $personalData = new PersonalData();
-        $personalData->user_id = $request->input('user_id');
-        $personalData->nama_lengkap = $validatedData['nama_lengkap'];
-        $personalData->nik = $validatedData['nik'];
-        $personalData->tempat_lahir = $validatedData['tempat_lahir'];
-        $personalData->tanggal_lahir = $validatedData['tanggal_lahir'];
-        $personalData->jenis_kelamin = $validatedData['jenis_kelamin'];
-        $personalData->nomor_telepon = $validatedData['nomor_telepon'];
-        $personalData->save();
-
-        // Return a success response
-        return response()->json(['message' => 'Personal data saved successfully']);
+    
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+    
+        // Simpan data step 2 ke session
+        $request->session()->put('register.personal_data', $request->all());
+    
+        return response()->json(['success' => true, 'step' => 3]);
     }
 
-    public function showBusinessForm($userId)
+    protected function handleUmkmDataStep(Request $request)
     {
-        // Get provinces, categories, etc.
-        $provinces = Province::all(); // Dropdown untuk provinsi
-        $categories = UmkmCategory::all(); // Kategori UMKM
-        return view('auth.register_business', [
-            'user_id' => $userId,
-            'provinces' => $provinces,
-            'categories' => $categories,
-        ]); // Tahap 3
-    }
-
-    public function registerBusiness(Request $request, $userId)
-    {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_usaha' => 'required|string|max:255',
             'nib' => 'nullable|string|max:255',
-            'deskripsi_usaha' => 'required|string|max:1000',
-            'kategori_umkm' => 'required|exists:umkm_categories,id',
+            'deskripsi_usaha' => 'required|string',
+            'kategori_umkm' => 'required|string|max:255',
             'tanggal_berdiri' => 'required|date',
-            'alamat_usaha' => 'required|string|max:500',
-            'kordinat_usaha' => 'nullable|string|max:255',
-            'kecamatan_id' => 'required|exists:kecamatan,id',
-            'kelurahan_id' => 'required|exists:kelurahan,id',
-            'rt' => 'required|string|max:3',
-            'rw' => 'required|string|max:3',
+            'alamat_usaha' => 'required|string|max:255',
+            'kabupaten_kota_id' => 'required|integer|exists:kabupaten_kotas,id',
+            'koordinat_usaha' => 'required|string|max:255',
+            'rt_rw' => 'required|string|max:255',
+            'modal_usaha' => 'required|numeric',
+            'aset_usaha' => 'required|numeric',
+            'penghasilan_bulanan' => 'required|numeric',
+            'jumlah_tenaga_kerja' => 'required|integer',
         ]);
 
-        Usaha::create([
-            'user_id' => $userId,
-            'nama_usaha' => $validated['nama_usaha'],
-            'nib' => $validated['nib'],
-            'deskripsi_usaha' => $validated['deskripsi_usaha'],
-            'kategori_umkm' => $validated['kategori_umkm'],
-            'tanggal_berdiri' => $validated['tanggal_berdiri'],
-            'alamat_usaha' => $validated['alamat_usaha'],
-            'kordinat_usaha' => $validated['kordinat_usaha'],
-            'kecamatan_id' => $validated['kecamatan_id'],
-            'kelurahan_id' => $validated['kelurahan_id'],
-            'rt' => $validated['rt'],
-            'rw' => $validated['rw'],
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'errors' => $validator->errors()]);
+        }
+
+        // Simpan data step 3 ke session
+        $request->session()->put('register.umkm_data', $request->all());
+
+        // Simpan semua data ke database
+        $accountData = $request->session()->get('register.account');
+        $personalData = $request->session()->get('register.personal_data');
+        $umkmData = $request->session()->get('register.umkm_data');
+
+        // Simpan data user
+        $user = User::create([
+            'username' => $accountData['username'],
+            'email' => $accountData['email'],
+            'password' => Hash::make($accountData['password']),
         ]);
 
-        return redirect()->route('register.financial', ['user' => $userId]);
-    }
+        // Simpan data personal
+        PersonalData::create(array_merge($personalData, ['user_id' => $user->id]));
 
-    public function showFinancialForm($userId)
-    {
-        return view('auth.register_financial', ['user_id' => $userId]); // Tahap 4
-    }
+        // Lanjutkan untuk simpan data UMKM atau tindakan lain
 
-    public function registerFinancial(Request $request, $userId)
-    {
-        $validated = $request->validate([
-            'modal_usaha' => 'required|numeric|min:0',
-            'asset_usaha' => 'required|numeric|min:0',
-            'penghasilan_bulanan' => 'required|numeric|min:0',
-            'jumlah_tenaga_kerja' => 'required|integer|min:0',
-        ]);
-
-        $usaha = Usaha::where('user_id', $userId)->first();
-        
-        Keuangan::create([
-            'usaha_id' => $usaha->id,
-            'modal_usaha' => $validated['modal_usaha'],
-            'asset_usaha' => $validated['asset_usaha'],
-            'penghasilan_bulanan' => $validated['penghasilan_bulanan'],
-            'jumlah_tenaga_kerja' => $validated['jumlah_tenaga_kerja'],
-        ]);
-
-        // Redirect to a success page or dashboard
-        return redirect()->route('dashboard')->with('success', 'Registrasi berhasil!');
+        return response()->json(['success' => true, 'step' => 4]);
     }
 }

@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
 
             <!-- left menu -->
-            <ul class="navbar-nav me-auto align-items-center">
+            <ul class="navbar-nav me-auto align-items-center ">
                 <li class="nav-item mx-lg-1">
                     <a class="nav-link active" href="#">Home</a>
                 </li>
@@ -40,7 +40,7 @@
             <!-- right menu -->
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item me-0">
-                    <a href="#" target="_blank" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
+                    <a href="{{ route('register')}}" target="_blank" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
                         <i class="mdi mdi-basket me-2"></i> Register UMKM
                     </a>
                 </li>

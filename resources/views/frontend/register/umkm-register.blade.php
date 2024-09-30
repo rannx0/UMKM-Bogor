@@ -5,7 +5,7 @@
    <div class="m-auto mt-5" style="width: 90%">
       <div class="d-flex justify-content-center">
          <div class="col-md-12">
-            <div class="card border-primary border shadow-lg w-100">
+            <div class="card border border-dark shadow-lg w-100">
                <div class="card-body">
                   <h3 class="h3 mb-3">Register Your UMKM</h3>
                   <div id="bar" class="progress mb-3" style="height: 7px;">
@@ -13,7 +13,7 @@
                   </div>
 
                   <div>
-                     <div id="rootwizard" class="d-flex flex-row">
+                     <div id="rootwizard" class="d-flex flex-row shadow-sm">
                         <!-- Sidebar navigation -->
                         <div class="d-flex flex-column align-items-start p-2 me-3">
                            <ul class="nav nav-pills nav-justified form-wizard flex-column mb-3">
@@ -83,55 +83,43 @@
 
 
                         <!-- Form content -->
-                        <div class="flex-grow-1 d-flex flex-column shadow border rounded">
-                           <div class="tab-content mb-0 p-3">
+                        <div class="flex-grow-1 d-flex flex-column">
+                           <div class="tab-content mb-0 p-3 border border-primary rounded shadow-lg">
+                              <!-- Form Step 1 Account Login -->
                               <div class="tab-pane fade" id="first">
-
-                                 <!-- Form Account Login -->
-                                 <form id="accountForm" method="post" action="#" class="form-horizontal">
+                                 <form id="accountForm" method="POST" action="{{ route('register.step') }}"
+                                    class="form-horizontal">
+                                    @csrf
+                                    <!-- Tambahkan CSRF token -->
                                     <div class="row">
                                        <div class="col-12">
                                           <div class="mb-3 row">
-                                             <label class="col-md-2 col-form-label" for="userName">User Name</label>
+                                             <label class="col-md-2 col-form-label" for="userName">Username</label>
                                              <div class="col-md-9">
                                                 <input type="text" class="form-control" id="userName" name="username"
-                                                   required>
+                                                   placeholder="Enter Your Username" required>
                                                 <div class="invalid-feedback">Username is required.</div>
-                                                <!-- Pesan kesalahan -->
                                              </div>
                                           </div>
                                           <div class="mb-3 row">
                                              <label class="col-md-2 col-form-label" for="Email">Email</label>
                                              <div class="col-md-9">
-                                                <input type="text" class="form-control" id="Email" name="email"
-                                                   required>
+                                                <input type="email" class="form-control" id="Email" name="email"
+                                                   placeholder="Enter Your Email" required>
                                                 <div class="invalid-feedback">Email is required.</div>
-                                                <!-- Pesan kesalahan -->
                                              </div>
                                           </div>
                                           <div class="mb-3 row">
                                              <label class="col-md-2 col-form-label" for="password">Password</label>
                                              <div class="col-md-9">
                                                 <div class="input-group input-group-merge">
-
                                                    <input type="password" class="form-control" id="password"
-                                                      name="password" required>
+                                                      placeholder="Enter Your Password" name="password" required>
                                                    <div class="input-group-text" data-password="false">
                                                       <span class="password-eye"></span>
                                                    </div>
+                                                   <div class="invalid-feedback">Password is required.</div>
                                                 </div>
-                                                <div class="invalid-feedback">Password is required.</div>
-                                                <!-- Pesan kesalahan -->
-                                             </div>
-                                          </div>
-                                          <div class="mb-3 row">
-                                             <label class="col-md-2 col-form-label" for="confirmPassword">Confirm
-                                                Password</label>
-                                             <div class="col-md-9">
-                                                <input type="password" class="form-control" id="confirmPassword"
-                                                   name="confirmPassword" required>
-                                                <div class="invalid-feedback">Please confirm your password.</div>
-                                                <!-- Pesan kesalahan -->
                                              </div>
                                           </div>
                                        </div>
@@ -139,9 +127,11 @@
                                  </form>
                               </div>
 
-                              <!-- Form Personal Data -->
+
+                              <!-- Form Step 2 Personal Data -->
                               <div class="tab-pane fade" id="second">
                                  <form id="profileForm" method="post" action="#" class="form-horizontal">
+                                    @csrf
                                     <h2>Data Pribadi</h2>
 
                                     <div class="mb-3">
@@ -153,22 +143,26 @@
 
                                     <div class="mb-3">
                                        <label for="nik" class="form-label">NIK</label>
-                                       <input type="text" class="form-control" id="nik" name="nik" required>
+                                       <input type="number" class="form-control" id="nik" name="nik" maxlength="16"
+                                          pattern="\d*"
+                                          oninput="this.value = this.value.replace(/\D/g, '').slice(0, 16)" required>
                                        <div class="invalid-feedback">Silakan masukkan NIK Anda.</div>
                                     </div>
 
-                                    <div class="mb-3">
-                                       <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
-                                       <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
-                                          required>
-                                       <div class="invalid-feedback">Silakan masukkan tempat lahir Anda.</div>
-                                    </div>
+                                    <div class="row">
+                                       <div class="col-md mb-3">
+                                          <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
+                                          <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                                             required>
+                                          <div class="invalid-feedback">Silakan masukkan tempat lahir Anda.</div>
+                                       </div>
 
-                                    <div class="mb-3">
-                                       <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
-                                       <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
-                                          required>
-                                       <div class="invalid-feedback">Silakan masukkan tanggal lahir Anda.</div>
+                                       <div class="col-md mb-3">
+                                          <label for="tanggal_lahir" class="form-label">Tanggal Lahir</label>
+                                          <input type="date" class="form-control" id="tanggal_lahir"
+                                             name="tanggal_lahir" required>
+                                          <div class="invalid-feedback">Silakan masukkan tanggal lahir Anda.</div>
+                                       </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -184,37 +178,48 @@
                                     <div class="mb-3">
                                        <label for="nomor_telepon" class="form-label">Nomor Telepon</label>
                                        <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon"
-                                          required>
-                                       <div class="invalid-feedback">Silakan masukkan nomor telepon Anda.</div>
+                                          maxlength="15" required pattern="^[0-9]+$"
+                                          title="Nomor telepon hanya boleh berisi angka"
+                                          oninput="this.value = this.value.replace(/\D/g, '').slice(0, 15)">
+                                       <div class="invalid-feedback">Silakan masukkan nomor telepon yang valid.</div>
                                     </div>
 
-                                    <div class="mb-3">
-                                       <label for="provinsi_id" class="form-label">Provinsi</label>
-                                       <select class="form-select" id="provinsi_id" name="provinsi_id" required>
-                                          <!-- Tambahkan pilihan provinsi di sini -->
-                                       </select>
-                                    </div>
+                                    <hr>
 
-                                    <div class="mb-3">
-                                       <label for="kabupaten_kota_id" class="form-label">Kabupaten/Kota</label>
-                                       <select class="form-select" id="kabupaten_kota_id" name="kabupaten_kota_id"
-                                          required>
-                                          <!-- Tambahkan pilihan kabupaten/kota di sini -->
-                                       </select>
+                                    <div class="row">
+                                       <div class="col-md mb-3">
+                                          <label for="provinsi_id" class="form-label">Provinsi</label>
+                                          <select class="form-select" id="provinsi_id" name="provinsi_id" required>
+                                             <option value="" disabled selected>Pilih Provinsi</option>
+                                             @foreach($provinsi as $prov)
+                                             <option value="{{ $prov->id }}">{{ $prov->nama }}</option>
+                                             @endforeach
+                                          </select>
+                                       </div>
+                                       <div class="col-md mb-3">
+                                          <label for="kabupaten_kota_id" class="form-label">Kabupaten/Kota</label>
+                                          <select class="form-select" id="kabupaten_kota_id" name="kabupaten_kota_id"
+                                             required>
+                                             <!-- buat dengan relasi berdasarkan provinsi -->
+                                             <option value="" disabled selected>Pilih Kabupaten/Kota</option>
+                                          </select>
+                                       </div>
                                     </div>
-
-                                    <div class="mb-3">
-                                       <label for="kecamatan_id" class="form-label">Kecamatan</label>
-                                       <select class="form-select" id="kecamatan_id" name="kecamatan_id" required>
-                                          <!-- Tambahkan pilihan kecamatan di sini -->
-                                       </select>
-                                    </div>
-
-                                    <div class="mb-3">
-                                       <label for="kelurahan_id" class="form-label">Kelurahan</label>
-                                       <select class="form-select" id="kelurahan_id" name="kelurahan_id" required>
-                                          <!-- Tambahkan pilihan kelurahan di sini -->
-                                       </select>
+                                    <div class="row">
+                                       <div class="col-md mb-3">
+                                          <label for="kecamatan_id" class="form-label">Kecamatan</label>
+                                          <select class="form-select" id="kecamatan_id" name="kecamatan_id" required>
+                                             <!-- buat dengan relasi berdasarkan kabupaten/kota -->
+                                             <option value="" disabled selected>Pilih Kecamatan</option>
+                                          </select>
+                                       </div>
+                                       <div class="col-md mb-3">
+                                          <label for="kelurahan_id" class="form-label">Kelurahan</label>
+                                          <select class="form-select" id="kelurahan_id" name="kelurahan_id" required>
+                                             <!-- buat dengan relasi berdasarkan kecamatan -->
+                                             <option value="" disabled selected>Pilih Kelurahan</option>
+                                          </select>
+                                       </div>
                                     </div>
 
                                     <div class="mb-3">
@@ -224,7 +229,7 @@
                                  </form>
                               </div>
 
-                              <!-- Form Usaha & Keuangan -->
+                              <!-- Form Step 3 Usaha & Keuangan -->
                               <div class="tab-pane fade" id="third">
                                  <form id="umkmForm" method="post" action="#" class="form-horizontal">
                                     <!-- UMKM Form content here -->
@@ -247,10 +252,7 @@
                                     <div class="mb-3">
                                        <label for="kategori_umkm" class="form-label">Kategori UMKM</label>
                                        <select class="form-select" id="kategori_umkm" name="kategori_umkm" required>
-                                          <option value="">Pilih Kategori</option>
-                                          <option value="kategori1">Kategori 1</option>
-                                          <option value="kategori2">Kategori 2</option>
-                                          <!-- Tambahkan kategori lainnya sesuai kebutuhan -->
+                                          <!-- Tambahkan kategori dari relasi umkm category -->
                                        </select>
                                     </div>
                                     <div class="mb-3">
@@ -263,7 +265,7 @@
                                        <input type="text" class="form-control" id="alamat_usaha" name="alamat_usaha"
                                           required>
                                     </div>
-                                    <div class="mb-3">
+                                    {{-- <div class="mb-3">
                                        <label for="kabupaten_kota_id" class="form-label">Kabupaten/Kota</label>
                                        <select class="form-select" id="kabupaten_kota_id" name="kabupaten_kota_id"
                                           required>
@@ -272,7 +274,7 @@
                                           <option value="kota2">Kota 2</option>
                                           <!-- Tambahkan pilihan kabupaten/kota di sini -->
                                        </select>
-                                    </div>
+                                    </div> --}}
                                     <div class="mb-3">
                                        <label for="koordinat_usaha" class="form-label">Koordinat Usaha (Google
                                           Maps)</label>
@@ -363,24 +365,62 @@
       });
       // Initialize the wizard with BootstrapWizard
       $("#rootwizard").bootstrapWizard({
-         // onNext: function(tab, navigation, index) {
-         //    var form = $($(tab).data("target-form"));
-         //    if (form && (form.addClass("was-validated"), !form[0].checkValidity())) {
-         //       event.preventDefault();
-         //       event.stopPropagation();
+         onNext: function(tab, navigation, index) {
+            console.log('onNext called');
+            console.log('index:', index);
+            console.log('tab:', tab);
+            console.log('navigation:', navigation);
+            var form = $($(tab).data("target-form"));
+            if (form && (form.addClass("was-validated"), !form[0].checkValidity())) {
+               // Jika form tidak valid, maka tampilkan error
+               form.find(':input:invalid').each(function() {
+               $(this).addClass('is-invalid'); // Tambahkan kelas invalid
+               });
+               return false;
+            } else {
+               // Jika form valid, maka lanjutkan ke step berikutnya
+               // Kirim data form via AJAX
+               var step = index; // Step saat ini
+               var formData = form.serialize() + '&step=' + step;
 
-         //       // Menampilkan pesan kesalahan
-         //       form.find(':input:invalid').each(function() {
-         //          $(this).addClass('is-invalid'); // Tambahkan kelas invalid
-         //       });
-         //       return false;
-         //    }
-         // },
+               $.ajax({
+                  type: "POST",
+                  url: form.attr('action'),
+                  data: formData + '&step=' + step,
+                  success: function(response) {
+                     if (response.success) {
+                        // Jika respons berhasil, lanjutkan ke step berikutnya
+                        $("#rootwizard").bootstrapWizard('next');
+                     } else {
+                        // Jika respons gagal, tampilkan error
+                        console.log('AJAX error');
+                        console.log('response:', response);
+                        // Tambahkan kode untuk menampilkan error di sini
+                        return false;
+                     }
+                  },
+                  error: function(response) {
+                     console.log('AJAX error');
+                     console.log('response:', response);
+                     // Tambahkan kode untuk menampilkan error di sini
+                     return false;
+                  }
+               });
+
+               return true; // Lanjutkan ke step berikutnya
+            }
+            
+         },
          onTabShow: function(tab, navigation, index) {
             var total = navigation.find("li.step").length;
-            var current = index + 1;
-            var percent = (current / total) * 100;
-            $("#bar .bar").css({ width: percent + "%" }); // Update progress bar
+            var current = index + 1; // Menghitung step saat ini (step dimulai dari 0)
+
+            if (current > 1) { // Hanya memperbarui progress mulai dari step 2
+               var percent = ((current - 1) / (total - 1)) * 100; // Menghitung progress mulai dari step 2
+               $("#bar .bar").css({ width: percent + "%" }); // Update progress bar
+            } else {
+               $("#bar .bar").css({ width: "0%" }); // Step 1, progress bar tetap kosong
+            }
 
             // Update sidebar steps
             navigation.find('li.step').each(function(i) {
@@ -438,6 +478,76 @@
                $('.previous').show(); // Tampilkan tombol "Previous" saat tidak di langkah terakhir
             }
 
+            // AJAX dropdowns hanya berfungsi pada step 3
+            if (index === total - 3) {
+               const $provinsiSelect = $('select[name="provinsi_id"]');
+               const $kabupatenKotaSelect = $('select[name="kabupaten_kota_id"]');
+               const $kecamatanSelect = $('select[name="kecamatan_id"]');
+               const $kelurahanSelect = $('select[name="kelurahan_id"]');
+
+               $provinsiSelect.on('change', function() {
+                  const provinsiId = $(this).val();
+                  if (provinsiId) {
+                     $.ajax({
+                     url: '/get-kabupaten-kota',
+                     type: 'GET',
+                     data: { provinsi_id: provinsiId },
+                     dataType: 'json',
+                     success: function(data) {
+                        $kabupatenKotaSelect.empty();
+                        $kabupatenKotaSelect.append('<option value="" disabled selected>Pilih Kabupaten/Kota</option>');
+                        $.each(data, function(key, value) {
+                           $kabupatenKotaSelect.append('<option value="'+ value.id +'">'+ value.nama +'</option>');
+                        });
+                     }
+                     });
+                  } else {
+                     $kabupatenKotaSelect.empty();
+                  }
+               });
+
+               $kabupatenKotaSelect.on('change', function() {
+                  const kabupatenKotaId = $(this).val();
+                  if (kabupatenKotaId) {
+                     $.ajax({
+                     url: '/get-kecamatan',
+                     type: 'GET',
+                     data: { kabupaten_kota_id: kabupatenKotaId },
+                     dataType: 'json',
+                     success: function(data) {
+                        $kecamatanSelect.empty();
+                        $kecamatanSelect.append('<option value="" disabled selected>Pilih Kecamatan</option>');
+                        $.each(data, function(key, value) {
+                           $kecamatanSelect.append('<option value="'+ value.id +'">'+ value.nama +'</option>');
+                        });
+                     }
+                     });
+                  } else {
+                     $kecamatanSelect.empty();
+                  }
+               });
+
+               $kecamatanSelect.on('change', function() {
+                  const kecamatanId = $(this).val();
+                  if (kecamatanId) {
+                     $.ajax({
+                     url: '/get-kelurahan',
+                     type: 'GET',
+                     data: { kecamatan_id: kecamatanId },
+                     dataType: 'json',
+                     success: function(data) {
+                        $kelurahanSelect.empty();
+                        $kelurahanSelect.append('<option value="" disabled selected>Pilih Kelurahan</option>');
+                        $.each(data, function(key, value) {
+                           $kelurahanSelect.append('<option value="'+ value.id +'">'+ value.nama +'</option>');
+                        });
+                     }
+                     });
+                  } else {
+                     $kelurahanSelect.empty();
+                  }
+               });
+               }
          }
       });
 
