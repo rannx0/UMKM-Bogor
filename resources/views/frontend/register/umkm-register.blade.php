@@ -252,7 +252,12 @@
                                     <div class="mb-3">
                                        <label for="kategori_umkm" class="form-label">Kategori UMKM</label>
                                        <select class="form-select" id="kategori_umkm" name="kategori_umkm" required>
-                                          <!-- Tambahkan kategori dari relasi umkm category -->
+                                          <option value="" disabled selected>Pilih Kategori UMKM</option>
+
+                                          @foreach($umkmCategories as $category)
+                                          <!-- Ambil data dari database -->
+                                          <option value="{{ $category->id }}">{{ $category->nama }}</option>
+                                          @endforeach
                                        </select>
                                     </div>
                                     <div class="mb-3">
@@ -260,30 +265,61 @@
                                        <input type="date" class="form-control" id="tanggal_berdiri"
                                           name="tanggal_berdiri" required>
                                     </div>
+                                    <div class="row">
+                                       <div class="col-md mb-3">
+                                          <label for="provinsi_id" class="form-label">Provinsi</label>
+                                          <select class="form-select" id="provinsi_id" name="provinsi_id" required>
+                                             <option value="" disabled selected>Pilih Provinsi</option>
+                                             @foreach($provinsi as $prov)
+                                             <option value="{{ $prov->id }}">{{ $prov->nama }}</option>
+                                             @endforeach
+                                          </select>
+                                       </div>
+                                       <div class="col-md mb-3">
+                                          <label for="kabupaten_kota_id" class="form-label">Kabupaten/Kota</label>
+                                          <select class="form-select" id="kabupaten_kota_id" name="kabupaten_kota_id"
+                                             required>
+                                             <!-- buat dengan relasi berdasarkan provinsi -->
+                                             <option value="" disabled selected>Pilih Kabupaten/Kota</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md mb-3">
+                                          <label for="kecamatan_id" class="form-label">Kecamatan</label>
+                                          <select class="form-select" id="kecamatan_id" name="kecamatan_id" required>
+                                             <!-- buat dengan relasi berdasarkan kabupaten/kota -->
+                                             <option value="" disabled selected>Pilih Kecamatan</option>
+                                          </select>
+                                       </div>
+                                       <div class="col-md mb-3">
+                                          <label for="kelurahan_id" class="form-label">Kelurahan</label>
+                                          <select class="form-select" id="kelurahan_id" name="kelurahan_id" required>
+                                             <!-- buat dengan relasi berdasarkan kecamatan -->
+                                             <option value="" disabled selected>Pilih Kelurahan</option>
+                                          </select>
+                                       </div>
+                                       <div class="col-md mb3">
+                                          <div class="mb-3">
+                                             <label for="rt" class="form-label">RT</label>
+                                             <input type="text" class="form-control" id="rt" name="rt" required>
+                                          </div>
+                                          <div class="mb-3">
+                                             <label for="rw" class="form-label">RW</label>
+                                             <input type="text" class="form-control" id="rw" name="rw" required>
+                                          </div>
+                                       </div>
+                                    </div>
                                     <div class="mb-3">
                                        <label for="alamat_usaha" class="form-label">Alamat Usaha</label>
                                        <input type="text" class="form-control" id="alamat_usaha" name="alamat_usaha"
                                           required>
                                     </div>
-                                    {{-- <div class="mb-3">
-                                       <label for="kabupaten_kota_id" class="form-label">Kabupaten/Kota</label>
-                                       <select class="form-select" id="kabupaten_kota_id" name="kabupaten_kota_id"
-                                          required>
-                                          <option value="">Pilih Kabupaten/Kota</option>
-                                          <option value="kota1">Kota 1</option>
-                                          <option value="kota2">Kota 2</option>
-                                          <!-- Tambahkan pilihan kabupaten/kota di sini -->
-                                       </select>
-                                    </div> --}}
                                     <div class="mb-3">
                                        <label for="koordinat_usaha" class="form-label">Koordinat Usaha (Google
                                           Maps)</label>
                                        <input type="text" class="form-control" id="koordinat_usaha"
                                           name="koordinat_usaha" required>
-                                    </div>
-                                    <div class="mb-3">
-                                       <label for="rt_rw" class="form-label">RT/RW</label>
-                                       <input type="text" class="form-control" id="rt_rw" name="rt_rw" required>
                                     </div>
                                  </form>
                                  <hr class="my-3">
@@ -354,7 +390,7 @@
    </div>
 </section>
 @endsection
-
+g
 @section('scripts')
 <script>
    $(document).ready(function() {
@@ -547,7 +583,77 @@
                      $kelurahanSelect.empty();
                   }
                });
-               }
+            }
+
+            if (index === total - 4) {
+               const $provinsiSelect = $('select[name="provinsi_id"]');
+               const $kabupatenKotaSelect = $('select[name="kabupaten_kota_id"]');
+               const $kecamatanSelect = $('select[name="kecamatan_id"]');
+               const $kelurahanSelect = $('select[name="kelurahan_id"]');
+
+               $provinsiSelect.on('change', function() {
+                  const provinsiId = $(this).val();
+                  if (provinsiId) {
+                     $.ajax({
+                     url: '/get-kabupaten-kota',
+                     type: 'GET',
+                     data: { provinsi_id: provinsiId },
+                     dataType: 'json',
+                     success: function(data) {
+                        $kabupatenKotaSelect.empty();
+                        $kabupatenKotaSelect.append('<option value="" disabled selected>Pilih Kabupaten/Kota</option>');
+                        $.each(data, function(key, value) {
+                           $kabupatenKotaSelect.append('<option value="'+ value.id +'">'+ value.nama +'</option>');
+                        });
+                     }
+                     });
+                  } else {
+                     $kabupatenKotaSelect.empty();
+                  }
+               });
+
+               $kabupatenKotaSelect.on('change', function() {
+                  const kabupatenKotaId = $(this).val();
+                  if (kabupatenKotaId) {
+                     $.ajax({
+                     url: '/get-kecamatan',
+                     type: 'GET',
+                     data: { kabupaten_kota_id: kabupatenKotaId },
+                     dataType: 'json',
+                     success: function(data) {
+                        $kecamatanSelect.empty();
+                        $kecamatanSelect.append('<option value="" disabled selected>Pilih Kecamatan</option>');
+                        $.each(data, function(key, value) {
+                           $kecamatanSelect.append('<option value="'+ value.id +'">'+ value.nama +'</option>');
+                        });
+                     }
+                     });
+                  } else {
+                     $kecamatanSelect.empty();
+                  }
+               });
+
+               $kecamatanSelect.on('change', function() {
+                  const kecamatanId = $(this).val();
+                  if (kecamatanId) {
+                     $.ajax({
+                     url: '/get-kelurahan',
+                     type: 'GET',
+                     data: { kecamatan_id: kecamatanId },
+                     dataType: 'json',
+                     success: function(data) {
+                        $kelurahanSelect.empty();
+                        $kelurahanSelect.append('<option value="" disabled selected>Pilih Kelurahan</option>');
+                        $.each(data, function(key, value) {
+                           $kelurahanSelect.append('<option value="'+ value.id +'">'+ value.nama +'</option>');
+                        });
+                     }
+                     });
+                  } else {
+                     $kelurahanSelect.empty();
+                  }
+               });
+            }
          }
       });
 
