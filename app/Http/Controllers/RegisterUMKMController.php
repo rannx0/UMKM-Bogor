@@ -14,6 +14,7 @@ use App\Models\Keuangan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterUMKMController extends Controller
 {
@@ -66,7 +67,7 @@ class RegisterUMKMController extends Controller
     protected function handleAccountStep(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
@@ -76,7 +77,7 @@ class RegisterUMKMController extends Controller
         }
 
         // Simpan data step 1 ke session
-        $request->session()->put('register.account', $request->only('username', 'email', 'password'));
+        $request->session()->put('register.account', $request->all());
 
         return response()->json(['success' => true, 'step' => 2]);
     }
@@ -109,7 +110,7 @@ class RegisterUMKMController extends Controller
 
     protected function handleUmkmDataStep(Request $request)
     {
-        // Validate umkm_data form
+        // Validasi umkm_data form
         $umkmValidator = Validator::make($request->all(), [
             'nama_usaha' => 'required|string|max:255',
             'nib' => 'nullable|string|max:255',
@@ -121,16 +122,12 @@ class RegisterUMKMController extends Controller
             'kabupaten_kota_id' => 'required|integer|exists:kabupaten_kotas,id',
             'kecamatan_id' => 'required|integer|exists:kecamatans,id',
             'kelurahan_id' => 'required|integer|exists:kelurahans,id',
-            'koordinat_usaha' => 'required|string|max:255',
+            'kordinat_usaha' => 'required|string|max:255',
             'rt' => 'required|string|max:5',
             'rw' => 'required|string|max:5',
-            'modal_usaha' => 'required|numeric',
-            'aset_usaha' => 'required|numeric',
-            'penghasilan_bulanan' => 'required|numeric',
-            'jumlah_tenaga_kerja' => 'required|integer',
         ]);
     
-        // Validate keuangan form
+        // Validasi keuangan form
         $keuanganValidator = Validator::make($request->all(), [
             'modal_usaha' => 'required|numeric|between:0,99999999999999.99',
             'asset_usaha' => 'required|numeric|between:0,99999999999999.99',
@@ -140,37 +137,74 @@ class RegisterUMKMController extends Controller
         ]);
     
         if ($umkmValidator->fails() || $keuanganValidator->fails()) {
-            return response()->json(['success' => false, 'errors' => array_merge($umkmValidator->errors(), $keuanganValidator->errors())]);
+            return response()->json(['success' => false, 'errors' => array_merge($umkmValidator->errors()->toArray(), $keuanganValidator->errors()->toArray())]);
         }
     
-        // Save umkm_data to session
-        $request->session()->put('register.umkm_data', $request->all());
+        // Simpan data UMKM dan keuangan di session
+        $umkmData = $request->only(['nama_usaha', 'nib', 'deskripsi_usaha', 'kategori_umkm', 'tanggal_berdiri', 'alamat_usaha', 'provinsi_id', 'kabupaten_kota_id', 'kecamatan_id', 'kelurahan_id', 'kordinat_usaha', 'rt', 'rw']);
+        $keuanganData = $request->only(['modal_usaha', 'asset_usaha', 'penghasilan_bulanan', 'penghasilan_tahunan', 'jumlah_tenaga_kerja']);
+
     
-        // Save keuangan data to session
-        $request->session()->put('register.keuangan_data', $request->all());
+        $request->session()->put('register.umkm_data', $umkmData);
+        $request->session()->put('register.keuangan_data', $keuanganData);
     
-        // Save all data to database
-        $accountData = $request->session()->get('register.account');
-        $personalData = $request->session()->get('register.personal_data');
-        $umkmData = $request->session()->get('register.umkm_data');
-        $keuanganData = $request->session()->get('register.keuangan_data');
     
-        // Save data user
-        $user = User::create([
-            'username' => $accountData['username'],
-            'email' => $accountData['email'],
-            'password' => Hash::make($accountData['password']),
-        ]);
+        return response()->json(['success' => true, 'message' => 'Data UMKM berhasil disimpan']);
+    }
     
-        // Save data personal
-        PersonalData::create(array_merge($personalData, ['user_id' => $user->id]));
+
+    public function submitFinalStep(Request $request)
+    {
+        // Ambil data dari session
+        $accountData = session('register.account');
+        $personalData = session('register.personal_data');
+        $umkmData = session('register.umkm_data');
+        $keuanganData = session('register.keuangan_data');
     
-        // Save data umkm
-        UmkmData::create(array_merge($umkmData, ['user_id' => $user->id]));
     
-        // Save data keuangan
-        KeuanganData::create(array_merge($keuanganData, ['usaha_id' => $umkm->id]));
+        // Cek jika data UMKM dan Keuangan telah terinput
+        if (empty($umkmData) || empty($keuanganData)) {
+            $missingData = [];
     
+            if (empty($umkmData)) {
+                $missingData[] = 'Data UMKM';
+            }
+    
+            if (empty($keuanganData)) {
+                $missingData[] = 'Data Keuangan';
+            }
+    
+            return response()->json([
+                'success' => false, 
+                'message' => implode(' dan ', $missingData) . ' belum terinput'
+            ]);
+        }
+    
+        // Simpan data ke database dalam transaksi
+        try {
+            DB::transaction(function () use ($accountData, $personalData, $umkmData, $keuanganData) {
+                // Simpan data user
+                $user = User::create($accountData);
+    
+                // Simpan data personal terkait user
+                $user->personalData()->create($personalData);
+    
+                // Simpan data UMKM terkait user
+                $umkm = $user->usaha()->create($umkmData);
+    
+                // Simpan data keuangan terkait UMKM
+                $umkm->keuangan()->create($keuanganData);
+            });
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Gagal menyimpan data: ' . $e->getMessage()]);
+        }
+    
+        // Hapus session setelah data disimpan
+        session()->forget(['register.account', 'register.personal_data', 'register.umkm_data', 'register.keuangan_data']);
+    
+        // Kembalikan respons sukses
         return response()->json(['success' => true, 'step' => 4]);
     }
+    
+
 }

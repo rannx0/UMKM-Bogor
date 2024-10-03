@@ -40,7 +40,7 @@
             <!-- right menu -->
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item me-0">
-                    <a href="{{ route('register')}}" target="_blank" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
+                    <a href="{{ route('umkm-register')}}" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
                         <i class="mdi mdi-basket me-2"></i> Register UMKM
                     </a>
                 </li>

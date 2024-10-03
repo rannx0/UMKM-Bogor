@@ -18,6 +18,8 @@ class Usaha extends Model
         'tanggal_berdiri',
         'alamat_usaha',
         'kordinat_usaha',
+        'provinsi_id',
+        'kabupaten_kota_id',
         'kecamatan_id',
         'kelurahan_id',
         'rt',
@@ -29,18 +31,33 @@ class Usaha extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function kategoriUmkm()
+    {
+        return $this->belongsTo(UmkmCategory::class, 'kategori_umkm');
+    }
+
     public function keuangan()
     {
         return $this->hasOne(Keuangan::class);
     }
 
+    public function provinsi()
+    {
+        return $this->belongsTo(Provinsi::class, 'provinsi_id');
+    }
+
+    public function kabupatenKota()
+    {
+        return $this->belongsTo(KabupatenKota::class, 'kabupaten_kota_id');
+    }
+    
     public function kecamatan()
     {
-        return $this->belongsTo(Kecamatan::class);
+        return $this->belongsTo(Kecamatan::class, 'kecamatan_id');
     }
 
     public function kelurahan()
     {
-        return $this->belongsTo(Kelurahan::class);
+        return $this->belongsTo(Kelurahan::class, 'kelurahan_id');
     }
 }

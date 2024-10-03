@@ -32,12 +32,24 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // Register Routes
-Route::get('/register', [RegisterUMKMController::class, 'showForm'])->name('register');
-Route::post('/register/step', [RegisterUMKMController::class, 'handleStep'])->name('register.step');
+Route::prefix('register')->group(function () {
+
+    //submit
+    Route::post('/submit-final-step', [RegisterUMKMController::class, 'submitFinalStep'])->name('submit.final.step');
+
+    Route::get('/umkm', [RegisterUMKMController::class, 'showForm'])->name('umkm-register');
+    Route::post('/step', [RegisterUMKMController::class, 'handleStep'])->name('handle-step');
+    Route::post('/step/1', [RegisterUMKMController::class, 'handleAccountStep'])->name('account-step');
+    Route::post('/step/2', [RegisterUMKMController::class, 'handlePersonalDataStep'])->name('personal-data-step');
+    Route::post('/step/3', [RegisterUMKMController::class, 'handleUmkmDataStep'])->name('umkm-data-step');
+    
+});
+
 // Register Locations
 Route::get('/get-kabupaten-kota', [RegisterUMKMController::class, 'getKabupatenKota'])->name('get.kabupaten.kota');
 Route::get('/get-kecamatan', [RegisterUMKMController::class, 'getKecamatan'])->name('get.kecamatan');
 Route::get('/get-kelurahan', [RegisterUMKMController::class, 'getKelurahan'])->name('get.kelurahan');
+
 
 // Halaman frontend dashboard yang bisa diakses oleh siapa saja
 Route::get('/', function () {
