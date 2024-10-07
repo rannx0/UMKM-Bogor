@@ -17,6 +17,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PersonalDataController;
 use App\http\Controllers\UsahaController;
+use App\Http\Controllers\UserDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,10 +86,18 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
 
     // Usaha list
     Route::get('usaha', [UsahaController::class, 'index'])->name('usaha.list');
+    Route::get('usaha/{id}', [UsahaController::class, 'detail'])->name('usaha.show');
 
     // Personal data list
     Route::get('personal-data', [PersonalDataController::class, 'index'])->name('personal_data.list');
     Route::get('personal-data/{id}', [PersonalDataController::class, 'show'])->name('personal_data.show');
+
+    // User Data
+    Route::get('/userdata', [UserDataController::class, 'index'])->name('userdata.index');
+    Route::get('/userdata/{id}', [UserDataController::class, 'show'])->name('userdata.show');
+    Route::get('/userdata/{id}/personal', [UserDataController::class, 'showPersonalData'])->name('userdata.personalData');
+    Route::get('/userdata/{id}/usaha', [UserDataController::class, 'showUsaha'])->name('userdata.usaha');
+    Route::get('/userdata/{id}/keuangan', [UserDataController::class, 'showKeuangan'])->name('userdata.keuangan');
 });
 
 // Manager Routes - Only for 'Manager' role

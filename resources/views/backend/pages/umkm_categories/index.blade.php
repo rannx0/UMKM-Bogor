@@ -32,10 +32,10 @@
                             <td>{{ $category->nama }}</td>
                             <td>
                                 <a href="{{ route('umkm-categories.edit', $category->id) }}" class="btn btn-sm btn-primary">Edit</a>
-                                <form action="{{ route('umkm-categories.destroy', $category->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Yakin ingin menghapus kategori ini?');">
+                                <form action="{{ route('umkm-categories.destroy', $category->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                    <button type="button" class="btn btn-sm btn-danger" onclick="return confirmDelete('{{ $category->nama }}')">Hapus</button>
                                 </form>
                             </td>
                         </tr>
@@ -44,4 +44,24 @@
             </table>
         @endif
     </div>
+@endsection
+
+@section('scripts')
+<script>
+    function confirmDelete(categoryName) {
+        Swal.fire({
+            title: 'Hapus Kategori?',
+            text: `Apakah Anda yakin ingin menghapus kategori "${categoryName}"?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $(this).parents('form').submit();
+            }
+        });
+        return false;
+    }
+</script>
 @endsection

@@ -25,6 +25,6 @@ class UsahaController extends Controller
         $usaha = Usaha::with(['user.personalData', 'kategoriUmkm'])->findOrFail($id);
 
         // Tampilkan halaman detail usaha
-        return view('backend.pages.business.detail', compact('usaha'));
+        return view('backend.pages.business.show', compact('usaha'));
     }
 }

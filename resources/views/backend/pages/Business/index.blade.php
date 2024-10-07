@@ -10,8 +10,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nama Lengkap</th>
-                    <th>Email</th>
+                    <th>Nama Pemilik</th>
                     <th>Nama Usaha</th>
                     <th>NIB</th>
                     <th>Kategori</th>
@@ -23,13 +22,12 @@
                 @foreach ($usahaList as $usaha)
                     <tr>
                         <td>{{ $usaha->user->personalData->nama_lengkap }}</td>
-                        <td>{{ $usaha->user->email }}</td>
                         <td>{{ $usaha->nama_usaha }}</td>
                         <td>{{ $usaha->nib ?? 'N/A' }}</td>
-                        <td>{{ $usaha->kategoriUmkm->nama_kategori }}</td>
+                        <td>{{ $usaha->kategoriUmkm->nama }}</td>
                         <td>{{ $usaha->alamat_usaha }}</td>
                         <td>
-                            <!-- Form delete dengan SweetAlert2 -->
+                            <a href="{{ route('usaha.show', $usaha->id) }}" class="btn btn-info">Detail</a>
                         </td>
                     </tr>
                 @endforeach
