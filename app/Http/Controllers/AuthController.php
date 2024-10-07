@@ -13,6 +13,11 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function LoginUser()
+    {
+        return view('frontend.newregister.login');
+    }
+
     // Proses login
     public function login(Request $request)
     {
@@ -61,6 +66,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }

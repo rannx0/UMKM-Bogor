@@ -6,9 +6,10 @@
       <div class="d-flex justify-content-center">
          <div class="col-md-12">
             <div class="card border border-dark shadow-lg w-100">
-               <a href="{{ route('home') }}">
+               <a href="#" onclick="return confirmClose()">
                   <button type="button" class="btn btn-danger position-absolute top-0 end-0 m-2">
-                     <i class="mdi mdi-window-close"></i></button>
+                     <i class="mdi mdi-window-close"></i>
+                  </button>
                </a>
                <div class="card-body">
                   <h3 class="h3 mb-3">Register Your UMKM</h3>
@@ -211,13 +212,13 @@
                                     <div class="row">
                                        <div class="col-md mb-3">
                                           <label for="provinsi_id" class="form-label">Provinsi</label>
-                                          <select class="form-select" id="personal_provinsi_id" name="provinsi_id"
+                                          {{-- <select class="form-select" id="personal_provinsi_id" name="provinsi_id"
                                              required>
                                              <option value="" disabled selected>Pilih Provinsi</option>
                                              @foreach($provinsi as $prov)
                                              <option value="{{ $prov->id }}">{{ $prov->nama }}</option>
                                              @endforeach
-                                          </select>
+                                          </select> --}}
                                        </div>
                                        <div class="col-md mb-3">
                                           <label for="kabupaten_kota_id" class="form-label">Kabupaten/Kota</label>
@@ -291,13 +292,13 @@
                                     <div class="row">
                                        <div class="col-md-6 mb-3">
                                           <label for="kategori_umkm" class="form-label">Kategori UMKM</label>
-                                          <select class="form-select" id="kategori_umkm" name="kategori_umkm" required>
+                                          {{-- <select class="form-select" id="kategori_umkm" name="kategori_umkm" required>
                                              <option value="" disabled selected>Pilih Kategori UMKM</option>
                                              @foreach($umkmCategories as $category)
                                              <!-- Ambil data dari database -->
                                              <option value="{{ $category->id }}">{{ $category->nama }}</option>
                                              @endforeach
-                                          </select>
+                                          </select> --}}
                                        </div>
                                        <div class="col-md mb-3">
                                           <label for="tanggal_berdiri" class="form-label">Tanggal Berdiri</label>
@@ -308,12 +309,12 @@
                                     <div class="row">
                                        <div class="col-md mb-3">
                                           <label for="provinsi_id" class="form-label">Provinsi</label>
-                                          <select class="form-select" id="provinsi_id" name="provinsi_id" required>
+                                          {{-- <select class="form-select" id="provinsi_id" name="provinsi_id" required>
                                              <option value="" disabled selected>Pilih Provinsi</option>
                                              @foreach($provinsi as $prov)
                                              <option value="{{ $prov->id }}">{{ $prov->nama }}</option>
                                              @endforeach
-                                          </select>
+                                          </select> --}}
                                        </div>
                                        <div class="col-md mb-3">
                                           <label for="kabupaten_kota_id" class="form-label">Kabupaten/Kota</label>
@@ -359,8 +360,8 @@
                                     <div class="mb-3">
                                        <label for="koordinat_usaha" class="form-label">Koordinat Usaha (Google
                                           Maps)</label>
-                                       <input type="text" class="form-control" id="kordinat_usaha"
-                                          name="kordinat_usaha" required>
+                                       <input type="text" class="form-control" id="kordinat_usaha" name="kordinat_usaha"
+                                          required>
                                     </div>
 
                                     <hr class="my-3">
@@ -404,7 +405,8 @@
 
                               <!-- Submit -->
                               <div class="tab-pane fade" id="fourth">
-                                 <form id="otherForm" method="post" action="{{ url('register/submit-final-step') }}" class="form-horizontal">
+                                 <form id="otherForm" method="post" action="{{ url('register/submit-final-step') }}"
+                                    class="form-horizontal">
                                     @csrf
                                     <div class="text-center">
                                        <h2 class="mt-0">
@@ -429,6 +431,7 @@
                                  </form>
                               </div>
 
+
                               <!-- Navigation buttons -->
                               <div class="wizard d-flex justify-content-between mt-3 col-12">
                                  <button class="btn btn-info previous">Previous</button>
@@ -447,6 +450,25 @@
 @endsection
 
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+      function confirmClose() {
+         Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to close this?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, close it!'
+         }).then((result) => {
+            if (result.isConfirmed) {
+                  window.location.href = "{{ route('home') }}";
+            }
+         });
+         return false;
+      }
+</script>
 <script>
    $(document).ready(function() {
       "use strict";
@@ -459,44 +481,62 @@
       // Initialize the wizard with BootstrapWizard
       $("#rootwizard").bootstrapWizard({
          onNext: function(tab, navigation, index) {
-            console.log('onNext called');
-            console.log('index:', index);
-            console.log('tab:', tab);
-            console.log('navigation:', navigation);
-
             var form = $($(tab).data("target-form"));
+
+            // Cek validitas form hanya saat tombol "Next" ditekan
             if (form && (form.addClass("was-validated"), !form[0].checkValidity())) {
-               // Jika form tidak valid, maka tampilkan error
+               // Jika form tidak valid, tampilkan error
                form.find(':input:invalid').each(function() {
-                  $(this).addClass('is-invalid'); // Tambahkan kelas invalid
+                     $(this).addClass('is-invalid'); // Tambahkan kelas invalid
                });
-               return false;
+               
+               // Tampilkan notifikasi menggunakan SweetAlert
+               Swal.fire({
+                     title: 'Perhatian!',
+                     text: 'Mohon isi semua field yang wajib.',
+                     icon: 'warning',
+                     confirmButtonText: 'OK'
+               });
+
+               return false; // Hentikan proses jika tidak valid
             } else {
-               // Jika form valid, maka lanjutkan ke step berikutnya
-               var step = index; // Step saat ini
-               var total = navigation.find("li.step").length;
+               // Jika form valid, lanjutkan ke step berikutnya
                var formData = form.serialize() + '&step=' + index;
+
                $.ajax({
-                  type: "POST",
-                  url: form.attr('action'), // URL to save data
-                  data: formData,
-                  success: function(response) {
-                  if (response.success) {
-                     console.log('Data saved successfully');
-                     $("#rootwizard").bootstrapWizard('next'); // Move to next step
-                  } else {
-                     console.log('Error saving data');
-                     return false; // If error, stay on current step
-                  }
-                  },
-                  error: function(response) {
-                  console.log('Error saving data');
-                  return false; // If error, stay on current step
-                  }
+                     type: "POST",
+                     url: form.attr('action'), // URL untuk menyimpan data
+                     data: formData,
+                     success: function(response) {
+                        if (response.success) {
+                           console.log('Data disimpan dengan sukses');
+                           $("#rootwizard").bootstrapWizard('next'); // Pindah ke step berikutnya
+                        } else {
+                           console.log('Error menyimpan data');
+                           Swal.fire({
+                                 title: 'Gagal!',
+                                 text: response.message,
+                                 icon: 'error',
+                                 confirmButtonText: 'OK'
+                           });
+                           return false; // Tetap di step yang sama
+                        }
+                     },
+                     error: function(response) {
+                        console.log('Error saat menyimpan data');
+                        Swal.fire({
+                           title: 'Gagal!',
+                           text: 'Terjadi kesalahan saat menghubungi server.',
+                           icon: 'error',
+                           confirmButtonText: 'OK'
+                        });
+                        return false; // Tetap di step yang sama
+                     }
                });
-               return true;
+               return true; // Valid dan bisa lanjut ke step berikutnya
             }
          },
+
 
          onTabShow: function(tab, navigation, index) {
             var total = navigation.find("li.step").length;
@@ -541,13 +581,6 @@
             } else {
                $('.previous').removeClass('disabled').css('pointer-events', 'auto');
             }
-
-            // // Modify 'Next' button to 'Submit' on the last step
-            // if (index === total - 2) {
-            //    $('.next').text('Submit');
-            // } else {
-            //    $('.next').text('Next');
-            // }
 
             // Sembunyikan tombol pada langkah terakhir
             if (index === total - 1) {
@@ -660,4 +693,3 @@
    });
 </script>
 @endsection
-

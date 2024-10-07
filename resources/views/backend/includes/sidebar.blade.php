@@ -126,10 +126,10 @@
                             <div class="collapse" id="sidebarUsers">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="crm-dashboard.html">Users</a>
+                                        <a href="{{ route('users.list')}}">Users</a>
                                     </li>
                                     <li>
-                                        <a href="crm-projects.html">Personal Data</a>
+                                        <a href="{{ route('personal_data.list')}}">Personal Data</a>
                                     </li>
                                 </ul>
                             </div>
@@ -147,6 +147,9 @@
                                     </li>
                                     <li>
                                         <a href="{{ route('umkm-categories.index')}}">Kategori Usaha</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('usaha.list')}}">Usaha</a>
                                     </li>
                                     <li>
                                         <a href="crm-orders-list.html">Data Keuangan</a>

@@ -12,6 +12,11 @@ use App\Http\Controllers\KecamatanController;
 use App\Http\Controllers\KelurahanController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\UmkmCategoryController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PersonalDataController;
+use App\http\Controllers\UsahaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,40 +30,29 @@ use App\Http\Controllers\UmkmCategoryController;
 */
 
 // Login Routes
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/gw5t', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [AuthController::class, 'LoginUser'])->name('login.user');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 // Logout Route
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Register Routes
-Route::prefix('register')->group(function () {
-
-    //submit
-    Route::post('/submit-final-step', [RegisterUMKMController::class, 'submitFinalStep'])->name('submit.final.step');
-
-    Route::get('/umkm', [RegisterUMKMController::class, 'showForm'])->name('umkm-register');
-    Route::post('/step', [RegisterUMKMController::class, 'handleStep'])->name('handle-step');
-    Route::post('/step/1', [RegisterUMKMController::class, 'handleAccountStep'])->name('account-step');
-    Route::post('/step/2', [RegisterUMKMController::class, 'handlePersonalDataStep'])->name('personal-data-step');
-    Route::post('/step/3', [RegisterUMKMController::class, 'handleUmkmDataStep'])->name('umkm-data-step');
-    
-});
-
-// Register Locations
-Route::get('/get-kabupaten-kota', [RegisterUMKMController::class, 'getKabupatenKota'])->name('get.kabupaten.kota');
-Route::get('/get-kecamatan', [RegisterUMKMController::class, 'getKecamatan'])->name('get.kecamatan');
-Route::get('/get-kelurahan', [RegisterUMKMController::class, 'getKelurahan'])->name('get.kelurahan');
-
+//RegisterForm
+Route::get('/get-locations/{type}/{id}', [LocationController::class, 'getLocations']);
+Route::post('/check-step-{step}', [RegistrationController::class, 'checkStep'])->name('check-step');
+Route::post('/register/finish', [RegistrationController::class, 'finishRegistration'])->name('registration.finish');
+Route::get('/register', [RegistrationController::class, 'showForm'])->name('registration.showForm');
+// Halaman sukses
+Route::get('/register/success', [RegistrationController::class, 'SuccessForm']);
 
 // Halaman frontend dashboard yang bisa diakses oleh siapa saja
 Route::get('/', function () {
     return view('frontend.dashboard');
 })->name('home');
 
-// Route::get('/register-desain', function () {
-//     return view('frontend.pages.register.multi-step-register');
-// })->name('regis');
+Route::get('/success', function () {
+    return view('frontend.register.success');
+})->name('success');
 
 // Superadmin Routes - Only accessible by users with 'Superadmin' role
 Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(function () {
@@ -84,6 +78,17 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
 
     // UMKM Category
     Route::resource('umkm-categories', UmkmCategoryController::class);
+
+    // User list
+    Route::get('users', [UserController::class, 'index'])->name('users.list');
+    Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    // Usaha list
+    Route::get('usaha', [UsahaController::class, 'index'])->name('usaha.list');
+
+    // Personal data list
+    Route::get('personal-data', [PersonalDataController::class, 'index'])->name('personal_data.list');
+    Route::get('personal-data/{id}', [PersonalDataController::class, 'show'])->name('personal_data.show');
 });
 
 // Manager Routes - Only for 'Manager' role
