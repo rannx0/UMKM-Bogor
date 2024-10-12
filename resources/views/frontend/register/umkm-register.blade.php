@@ -291,8 +291,8 @@
                                     </div>
                                     <div class="row">
                                        <div class="col-md-6 mb-3">
-                                          <label for="kategori_umkm" class="form-label">Kategori UMKM</label>
-                                          {{-- <select class="form-select" id="kategori_umkm" name="kategori_umkm" required>
+                                          <label for="umkm_category_id" class="form-label">Kategori UMKM</label>
+                                          {{-- <select class="form-select" id="umkm_category_id" name="umkm_category_id" required>
                                              <option value="" disabled selected>Pilih Kategori UMKM</option>
                                              @foreach($umkmCategories as $category)
                                              <!-- Ambil data dari database -->

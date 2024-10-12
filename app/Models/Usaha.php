@@ -14,7 +14,7 @@ class Usaha extends Model
         'nama_usaha',
         'nib',
         'deskripsi_usaha',
-        'kategori_umkm',
+        'umkm_category_id',
         'tanggal_berdiri',
         'alamat_usaha',
         'kordinat_usaha',
@@ -28,12 +28,12 @@ class Usaha extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function kategoriUmkm()
     {
-        return $this->belongsTo(UmkmCategory::class, 'kategori_umkm');
+        return $this->belongsTo(UmkmCategory::class, 'umkm_category_id');
     }
 
     public function keuangan()

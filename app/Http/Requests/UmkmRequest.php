@@ -17,7 +17,7 @@ class UmkmRequest extends FormRequest
             'nama_usaha' => 'required|string|max:255',
             'nib' => 'nullable|string|max:255',
             'deskripsi_usaha' => 'required|string',
-            'kategori_umkm' => 'required|exists:umkm_categories,id',
+            'umkm_category_id' => 'required|exists:umkm_categories,id',
             'tanggal_berdiri' => 'required|date',
             'alamat_usaha' => 'required|string|max:255',
             'provinsi_id' => 'required|integer|exists:provinsis,id',

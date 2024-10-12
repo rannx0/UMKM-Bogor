@@ -58,7 +58,7 @@ class UmkmSeeder extends Seeder
                 'nama_usaha' => 'Usaha ' . $i,
                 'nib' => 'NIB12345' . $i,
                 'deskripsi_usaha' => 'Deskripsi usaha ' . $i,
-                'kategori_umkm' => 4, // Ganti sesuai ID Kategori UMKM di database
+                'umkm_category_id' => 4, // Ganti sesuai ID Kategori UMKM di database
                 'tanggal_berdiri' => '2010-01-' . str_pad($i, 2, '0', STR_PAD_LEFT),
                 'alamat_usaha' => 'Alamat Usaha No. ' . $i,
                 'provinsi_id' => 1,

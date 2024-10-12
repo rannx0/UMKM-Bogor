@@ -94,7 +94,7 @@ class RegistrationController extends Controller
 
         session([
             'umkmData' => array_intersect_key($validatedData, array_flip([
-                'nama_usaha', 'nib', 'deskripsi_usaha', 'kategori_umkm', 'tanggal_berdiri',
+                'nama_usaha', 'nib', 'deskripsi_usaha', 'umkm_category_id', 'tanggal_berdiri',
                 'alamat_usaha', 'provinsi_id', 'kabupaten_kota_id', 'kecamatan_id', 'kelurahan_id',
                 'kordinat_usaha', 'rt', 'rw'
             ])),

@@ -18,6 +18,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PersonalDataController;
 use App\http\Controllers\UsahaController;
 use App\Http\Controllers\UserDataController;
+use App\Http\Controllers\DatatableUmkmController;
+use App\http\controllers\DashboardFrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,13 +49,16 @@ Route::get('/register', [RegistrationController::class, 'showForm'])->name('regi
 Route::get('/register/success', [RegistrationController::class, 'SuccessForm']);
 
 // Halaman frontend dashboard yang bisa diakses oleh siapa saja
-Route::get('/', function () {
-    return view('frontend.dashboard');
-})->name('home');
+Route::get('/', [DashboardFrontendController::class, 'index'])->name('home');
 
-Route::get('/success', function () {
-    return view('frontend.register.success');
-})->name('success');
+Route::get('/data-umkm', [DatatableUmkmController::class, 'umkmdatatable'])->name('data-umkm');
+Route::get('/data-umkm/{nama_kecamatan}/{id}', [DatatableUmkmController::class, 'showKecamatanUmkm'])->name('kecamatan.umkm');
+Route::get('/data-umkm/{nama_kecamatan}/{nama_usaha}/{id}', [DatatableUmkmController::class, 'showUmkmDetail'])->name('detail.umkm');
+
+
+Route::get('/propil', function () {
+    return view('frontend.pages.data-umkm.umkm-profile');
+});
 
 // Superadmin Routes - Only accessible by users with 'Superadmin' role
 Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(function () {

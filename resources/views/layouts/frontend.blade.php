@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    
-<!-- Mirrored from coderthemes.com/hyper/saas/landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Jul 2022 10:21:17 GMT -->
 <head>
-        <title>Landing Page | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
-        
-        @include('frontend.includes.head')
+    <title>Landing Page | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
 
-    </head>
+    @include('frontend.includes.head')
+    @yield('styles')
+</head>
 
-    <body class="loading" data-layout-config='{"darkMode":false}'>
+<body class="loading" data-layout-config='{"darkMode":false}'>
+
+    <!-- Pre-loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner-border avatar-lg text-primary" role="status">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Preloader -->
 
 
-        @include('frontend.includes.navbar')
+    @include('frontend.includes.navbar')
 
-        @yield('content')
+    @yield('content')
 
-        @include('frontend.includes.footer')
+    @include('frontend.includes.footer')
 
-        @include('frontend.includes.script')
+    @include('frontend.includes.script')
 
-    </body>
+    @yield('scripts')
 
+</body>
 
-<!-- Mirrored from coderthemes.com/hyper/saas/landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Jul 2022 10:21:23 GMT -->
 </html>

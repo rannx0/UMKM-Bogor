@@ -11,6 +11,11 @@ class Kecamatan extends Model
 
     protected $fillable = ['kabupaten_kota_id', 'nama'];
 
+    public function usaha()
+    {
+        return $this->hasMany(Usaha::class, 'kecamatan_id', 'id');
+    }
+
     public function kabupatenKota()
     {
         return $this->belongsTo(KabupatenKota::class);

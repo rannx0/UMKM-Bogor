@@ -239,8 +239,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="kategori_umkm" class="form-label">Business Category</label>
-                                        <select class="form-select" id="kategori_umkm" name="kategori_umkm" required>
+                                        <label for="umkm_category_id" class="form-label">Business Category</label>
+                                        <select class="form-select" id="umkm_category_id" name="umkm_category_id" required>
                                             <option value="" disabled selected>Select Business Category</option>
                                             @foreach($umkmCategories as $category)
                                             <option value="{{ $category->id }}">{{ $category->nama }}</option>

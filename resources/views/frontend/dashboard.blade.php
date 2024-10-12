@@ -5,14 +5,6 @@
 @section('content')
 <!-- START HERO -->
 <section class="hero-section">
-    {{-- <a href="#" class="dropdown-item notify-item"
-    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-    <i class="mdi mdi-logout me-1"></i>
-    <span>Logout</span>
-    </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form> --}}
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-5">
@@ -30,7 +22,7 @@
                         registrasi dan pengawasan UMKM di Kota Bogor."
                     </p>
 
-                    <a href="#" target="_blank" class="btn btn-success">Selengkapnya <i
+                    <a href="{{ route('data-umkm')}}" class="btn btn-success">Selengkapnya <i
                             class="mdi mdi-arrow-right ms-1"></i></a>
                 </div>
             </div>
@@ -44,7 +36,8 @@
 </section>
 <!-- END HERO -->
 
-<section class="py-5">
+<!-- START ABOUT US -->
+<section class="py-5" id="about-us">
     <div class="container">
         <div class="row pb-3 pt-5 align-items-center">
             <div class="col-lg-6 col-md-5">
@@ -84,157 +77,47 @@
         </div>
     </div>
 </section>
+<!-- END ABOUT US -->
 
-<!-- START SERVICES -->
-<section class="py-5">
+<!-- START TOP UMKM -->
+<section class="py-5 bg-light" id="data-umkm">
     <div class="container">
         <div class="row py-4">
             <div class="col-lg-12">
                 <div class="text-center">
-                    <h1 class="mt-0"><i class="mdi mdi-infinity"></i></h1>
-                    <h3>Latest <span class="text-primary">UMKM Database</span> in <span class="text-primary">Bogor City
-                        </span></h3>
-                    <p class="text-muted mt-2">An Overview of Newly Registered Micro, Small, and Medium Enterprises in
-                        the Database, Supporting Local Economic Growth</p>
+                    <h1 class="mt-0 text-primary"><i class="mdi mdi-infinity"></i></h1>
+                    <h3>Latest <span class="text-primary">UMKM Database</span> in <span class="text-primary">Bogor City</span></h3>
+                    <p class="text-muted mt-2">An Overview of Newly Registered Micro, Small, and Medium Enterprises in the Database, Supporting Local Economic Growth</p>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="text-center p-2 p-sm-3">
-                    <div class="avatar-sm m-auto">
-                        <span class="avatar-title bg-primary-lighten rounded-circle">
-                            <i class="uil uil-desktop text-primary font-24"></i>
-                        </span>
+            @foreach ($topCategories as $index => $category)
+                <div class="col-lg-4 col-md-6">
+                    <div class="card category-card text-center shadow-sm border-0 p-4 my-3">
+                        <a href="{{ route('data-umkm') }}">
+                        <div class="avatar-sm m-auto mb-3">
+                            <!-- Membungkus icon dengan link ke route 'data-umkm' -->
+                                <span class="avatar-title bg-primary-lighten rounded-circle icon-circle">
+                                    <i class="text-primary font-24">{{ $index + 1 }}</i>
+                                </span>
+                            </div>
+                            <h4 class="mt-3">{{ $category->nama }}</h4>
+                            <p class="text-muted mt-2 mb-0">
+                                Total UMKM: {{ $category->usaha_count }}
+                            </p>
+                        </a>
                     </div>
-                    <h4 class="mt-3">Responsive Layouts</h4>
-                    <p class="text-muted mt-2 mb-0">Et harum quidem rerum as expedita distinctio nam libero tempore
-                        cum soluta nobis est cumque quo.
-                    </p>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="text-center p-2 p-sm-3">
-                    <div class="avatar-sm m-auto">
-                        <span class="avatar-title bg-primary-lighten rounded-circle">
-                            <i class="uil uil-vector-square text-primary font-24"></i>
-                        </span>
-                    </div>
-                    <h4 class="mt-3">Based on Bootstrap UI</h4>
-                    <p class="text-muted mt-2 mb-0">Temporibus autem quibusdam et aut officiis necessitatibus saepe
-                        eveniet ut sit et recusandae.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="text-center p-2 p-sm-3">
-                    <div class="avatar-sm m-auto">
-                        <span class="avatar-title bg-primary-lighten rounded-circle">
-                            <i class="uil uil-presentation text-primary font-24"></i>
-                        </span>
-                    </div>
-                    <h4 class="mt-3">Creative Design</h4>
-                    <p class="text-muted mt-2 mb-0">Nam libero tempore, cum soluta a est eligendi minus id quod
-                        maxime placeate facere assumenda est.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="text-center p-2 p-sm-3">
-                    <div class="avatar-sm m-auto">
-                        <span class="avatar-title bg-primary-lighten rounded-circle">
-                            <i class="uil uil-apps text-primary font-24"></i>
-                        </span>
-                    </div>
-                    <h4 class="mt-3">Multiple Applications</h4>
-                    <p class="text-muted mt-2 mb-0">Et harum quidem rerum as expedita distinctio nam libero tempore
-                        cum soluta nobis est cumque quo.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="text-center p-2 p-sm-3">
-                    <div class="avatar-sm m-auto">
-                        <span class="avatar-title bg-primary-lighten rounded-circle">
-                            <i class="uil uil-shopping-cart-alt text-primary font-24"></i>
-                        </span>
-                    </div>
-                    <h4 class="mt-3">Ecommerce Pages</h4>
-                    <p class="text-muted mt-2 mb-0">Temporibus autem quibusdam et aut officiis necessitatibus saepe
-                        eveniet ut sit et recusandae.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="text-center p-2 p-sm-3">
-                    <div class="avatar-sm m-auto">
-                        <span class="avatar-title bg-primary-lighten rounded-circle">
-                            <i class="uil uil-grids text-primary font-24"></i>
-                        </span>
-                    </div>
-                    <h4 class="mt-3">Multiple Layouts</h4>
-                    <p class="text-muted mt-2 mb-0">Nam libero tempore, cum soluta a est eligendi minus id quod
-                        maxime placeate facere assumenda est.
-                    </p>
-                </div>
-            </div>
+            @endforeach
         </div>
-
     </div>
 </section>
-<!-- END SERVICES -->
-
-<!-- START FEATURES 2 -->
-{{-- <section class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="text-center">
-                    <h1 class="mt-0"><i class="mdi mdi-heart-multiple-outline"></i></h1>
-                    <h3>Features you'll <span class="text-danger">love</span></h3>
-                    <p class="text-muted mt-2">Hyper comes with next generation ui design and have multiple benefits
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-2 py-5 align-items-center">
-            <div class="col-lg-5 col-md-6">
-                <img src="assets/images/features-1.svg" class="img-fluid" alt="">
-            </div>
-            <div class="col-lg-6 offset-md-1 col-md-5">
-                <h3 class="fw-normal">Inbuilt applications and pages</h3>
-                <p class="text-muted mt-3">Hyper comes with a variety of ready-to-use applications and pages that help
-                    to speed up the development</p>
-
-                <div class="mt-4">
-                    <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Projects & Tasks</p>
-                    <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Ecommerce Application Pages
-                    </p>
-                    <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Profile, pricing, invoice
-                    </p>
-                    <p class="text-muted"><i class="mdi mdi-circle-medium text-primary"></i> Login, signup, forget
-                        password</p>
-                </div>
-
-                <a href="#" class="btn btn-primary rounded-pill mt-3">Read More <i
-                        class="mdi mdi-arrow-right ms-1"></i></a>
-
-            </div>
-        </div>
-
-    </div>
-</section> --}}
-<!-- END FEATURES 2 -->
-
+<!-- END TOP UMKM -->
 
 <!-- START FAQ -->
-<section class="py-5">
+<section class="py-5" id="faqs">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -298,12 +181,9 @@
 </section>
 <!-- END FAQ -->
 
-<!-- END FAQ -->
-
-
 <!-- START CONTACT -->
-<section class="py-5 bg-light-lighten border-top border-bottom border-light">
-    <div class="container">
+<section class="py-5 bg-light-lighten border-top border-bottom border-light" id="contact-us">
+    <div class="container" >
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-center">

@@ -1,5 +1,40 @@
-<!-- NAVBAR START -->
-<nav id="navbar" class="navbar navbar-expand-lg py-lg-3 navbar-dark sticky-top">
+<style>
+    .btn-hover-effect {
+        transition: all 0.3s ease;
+    }
+
+    .btn-hover-effect:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        background-color: #7E71F1; /* Warna hover biru lebih cerah */
+        color: white; /* Ubah teks jadi putih */
+    }
+
+    .navbar-nav .nav-link {
+        font-weight: 600; /* Menebalkan teks */
+        font-size: 16px; /* Ukuran font */
+        color: #ffffff; /* Warna default teks */
+        padding: 0.5rem 1rem; /* Tambahkan padding */
+        transition: all 0.3s ease-in-out; /* Animasi halus saat hover */
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #0d6efd; /* Warna saat hover (Bootstrap primary color) */
+        transform: translateY(-2px); /* Sedikit mengangkat teks */
+    }
+
+    .navbar-nav .nav-link.active {
+        color: #0d6efd; /* Warna untuk link aktif */
+        border-bottom: 2px solid #0d6efd; /* Garis bawah untuk item aktif */
+    }
+
+    .navbar-nav .nav-item {
+        margin-left: 1rem; /* Tambahkan margin antar item */
+    }
+
+</style>
+<!-- Updated NAVBAR -->
+<nav id="navbar" class="navbar navbar-expand-lg py-lg-3 sticky-top">
     <div class="container">
 
         <!-- logo -->
@@ -18,99 +53,69 @@
             <!-- left menu -->
             <ul class="navbar-nav me-auto align-items-center ">
                 <li class="nav-item mx-lg-1">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link active" href="{{ route('home') }}">Home</a>
                 </li>
                 <li class="nav-item mx-lg-1">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="#about-us">About Us</a>
                 </li>
                 <li class="nav-item mx-lg-1">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="#data-umkm">Data UMKM</a>
                 </li>
                 <li class="nav-item mx-lg-1">
-                    <a class="nav-link" href="#">FAQs</a>
+                    <a class="nav-link" href="#faqs">FAQs</a>
                 </li>
                 <li class="nav-item mx-lg-1">
-                    <a class="nav-link" href="#">Clients</a>
-                </li>
-                <li class="nav-item mx-lg-1">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="#contact-us">Contact</a>
                 </li>
             </ul>
 
             <!-- right menu -->
             <ul class="navbar-nav ms-auto align-items-center">
+                @unlessrole('User')
                 <li class="nav-item me-1">
-                    <button type="button" class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex" data-bs-toggle="modal" data-bs-target="#login-modal"><i class="mdi mdi-account-circle me-1"></i>Sign in Account</button>
+                    <a href="{{ route('login.user')}}"
+                        class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex btn-hover-effect">
+                        <i class="mdi mdi-account-circle me-1"></i>Sign in Account
+                    </a>
                 </li>
-                <li class="nav-item me-0">
+                <li class="nav-item me-1">
                     <a href="{{ route('registration.showForm')}}"
-                        class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex">
+                        class="btn btn-sm btn-light rounded-pill d-none d-lg-inline-flex btn-hover-effect">
                         <i class="mdi mdi-store me-1"></i>Register UMKM
                     </a>
                 </li>
+                @endunlessrole
+                @role('User')
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle bg-transparent" href="#" id="userDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="account-user-avatar">
+                            <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle"
+                                style="width: 50px">
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                        {{-- Dropdown items --}}
+                        <li>
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <i class="mdi mdi-account-circle me-1"></i>
+                                <span>My Account</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item notify-item"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="mdi mdi-logout me-1"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+                @endrole
             </ul>
-
         </div>
     </div>
 </nav>
-<!-- NAVBAR END -->
-
-<!-- Login modal -->
-<div id="login-modal" class="rounded modal fade" tabindex="1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="text-center py-4">
-                <a href="index.html" class="text-success">
-                    <span><img src="assets/images/logo-dark.png" alt="" height="18"></span>
-                </a>
-            </div>
-            <div class="modal-body px-4 pb-5">
-                <form method="POST" action="{{ route('login.submit') }}">
-                    @csrf
-                    
-                    <!-- Email Input -->
-                    <div class="row mb-3">
-                        <label class="col-3 col-form-label" for="email">Email</label>
-                        <div class="col-9">
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" required autofocus>
-                            @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Password Input -->
-                    <div class="row mb-3">
-                        <label class="col-3 col-form-label" for="password">Password</label>
-                        <div class="col-9">
-                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required>
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Remember Me Checkbox -->
-                    <div class="row mb-3">
-                        <div class="col-3 col-form-label"></div>
-                        <div class="col-9">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                            <label class="form-check-label" for="remember">Remember Me</label>
-                        </div>
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success btn-md rounded px-5">
-                            <i class="mdi mdi-login"></i> Login
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>

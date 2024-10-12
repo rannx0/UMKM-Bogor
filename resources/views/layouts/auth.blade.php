@@ -10,7 +10,19 @@
     @yield('styles')
 </head>
 
-<body class="loading authentication-bg" data-layout-config='{"darkMode":false}' >
+<body class="loading authentication-bg" data-layout-config='{"darkMode":false}'>
+
+    <!-- Pre-loader -->
+    <div id="preloader">
+        <div id="status">
+            <div class="spinner-border avatar-lg text-primary" role="status">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <!-- End Preloader -->
     <!-- Begin page -->
     @yield('content')
     <!-- end page -->

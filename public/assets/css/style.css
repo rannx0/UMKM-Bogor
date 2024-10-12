@@ -1,3 +1,79 @@
 #navbar {
+    background-color: #7D72F1;
     transition: background-color 0.4s ease;
 }
+
+section#data-umkm {
+    background: #f8f9fa;
+}
+
+/* Card dengan shadow dan border radius */
+.category-card {
+    background: white;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Shadow effect dan hover animasi */
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling untuk icon nomor */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e3f2fd;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .icon-circle {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Heading styling */
+.category-card h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #343a40;
+}
+
+/* P text styling */
+.category-card p {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Animasi pada hover */
+.category-card:hover h4, 
+.category-card:hover p {
+    color: #007bff;
+}
+
+/* Styling untuk icon nomor dengan ukuran lebih besar dan font menarik */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e3f2fd;
+    transition: all 0.3s ease;
+    font-size: 30px; /* Ukuran font lebih besar */
+    font-family: 'Poppins', sans-serif; /* Gunakan font Poppins */
+    font-weight: 600; /* Tebal font */
+}
+
+.category-card:hover .icon-circle {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Optional: Impor Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
