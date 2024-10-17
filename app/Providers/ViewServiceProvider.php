@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Configuration;
+use App\Models\HeroContent;
+use App\Models\AboutUs;
+use App\Models\Faq;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -20,6 +23,16 @@ class ViewServiceProvider extends ServiceProvider
 
         // Membagikan data konfigurasi ke semua view
         View::share('configuration', $configuration);
+        View::composer('frontend.dashboard', function ($view) {
+            $aboutUs = AboutUs::first();
+            $faqs = Faq::take(4)->get();
+            $heroContent = HeroContent::first();
+            $view->with([
+                'aboutUs' => $aboutUs,
+                'heroContent' => $heroContent,
+                'faqs' => $faqs,
+            ]);
+        });
     }
 
     /**

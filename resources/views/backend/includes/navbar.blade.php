@@ -153,13 +153,24 @@
             </div>
         </li> --}}
 
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle bg-transparent m-1 me-4" href="#" id="userDropdown" role="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#"
+                role="button" aria-haspopup="false" aria-expanded="false">
                 <span class="account-user-avatar">
-                    <img src="{{ asset('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle"
-                        style="width: 50px">
+                    <img src="{{ asset('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle">
                 </span>
+                @if(Auth::check())
+                <span>
+                    <span class="account-user-name">{{ Auth::user()->name }}</span>
+                    <span class="account-position">
+                        @if(Auth::user()->roles->isNotEmpty())
+                            {{ Auth::user()->roles->first()->name }}  <!-- Menampilkan role pertama -->
+                        @else
+                            No Role
+                        @endif
+                    </span>
+                </span>
+            @endif
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
                 <!-- item-->
@@ -168,27 +179,9 @@
                 </div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="#" class="dropdown-item notify-item">
                     <i class="mdi mdi-account-circle me-1"></i>
                     <span>My Account</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="mdi mdi-account-edit me-1"></i>
-                    <span>Settings</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="mdi mdi-lifebuoy me-1"></i>
-                    <span>Support</span>
-                </a>
-
-                <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                    <i class="mdi mdi-lock-outline me-1"></i>
-                    <span>Lock Screen</span>
                 </a>
 
                 <!-- item-->

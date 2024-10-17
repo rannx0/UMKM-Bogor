@@ -90,32 +90,27 @@
             <li class="side-nav-title side-nav-item mt-2">Apps</li>
 
             <li class="side-nav-item">
-                <a href="{{ route('configuration.index')}}"
-                    class="side-nav-link">
+                <a data-bs-toggle="collapse" href="#sidebarWebContent" aria-expanded="false" aria-controls="sidebarWebContent" class="side-nav-link">
                     <i class="uil uil-cog"></i>
-                    <span>Configuration </span>
+                    <span> Configurations </span>
+                    <span class="menu-arrow"></span>
                 </a>
-            </li>
-            <li class="side-nav-item">
-                <a href="{{ route('hero.index')}}"
-                    class="side-nav-link">
-                    <i class="uil uil-cog"></i>
-                    <span>Hero Content </span>
-                </a>
-            </li>
-            <li class="side-nav-item">
-                <a href="{{ route('about.index')}}"
-                    class="side-nav-link">
-                    <i class="uil uil-cog"></i>
-                    <span>About Us </span>
-                </a>
-            </li>
-            <li class="side-nav-item">
-                <a href="{{ route('faqs.index')}}"
-                    class="side-nav-link">
-                    <i class="uil uil-cog"></i>
-                    <span>FAQs </span>
-                </a>
+                <div class="collapse" id="sidebarWebContent">
+                    <ul class="side-nav-second-level">
+                        <li>
+                            <a href="{{ route('configuration.index')}}">Configuration</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('hero.index')}}">Hero Content</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('about.index')}}">About Us</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('faqs.index')}}">FAQs</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
 
             @role('Superadmin')
@@ -124,6 +119,7 @@
                     aria-controls="sidebarDashboards" class="side-nav-link">
                     <i class="uil uil-shield"></i>
                     <span>Admin Manager </span>
+                    <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="sidebarPermission">
                     <ul class="side-nav-second-level">
@@ -143,6 +139,7 @@
                     class="side-nav-link">
                     <i class="uil uil-users-alt"></i>
                     <span>User Manager </span>
+                    <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="usermanager">
                     <ul class="side-nav-second-level">
@@ -170,6 +167,7 @@
                     class="side-nav-link">
                     <i class="uil uil-map-marker"></i>
                     <span>Database Locations </span>
+                    <span class="menu-arrow"></span>
                 </a>
                 <div class="collapse" id="sidebarLocations">
                     <ul class="side-nav-second-level">

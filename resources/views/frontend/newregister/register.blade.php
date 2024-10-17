@@ -22,7 +22,8 @@
                                 aria-orientation="vertical">
                                 <!-- Step 1 -->
                                 <a class="nav-link nav-tabs active" id="form-step-1-tab" data-bs-toggle="pill"
-                                    href="#form-step-1" role="tab" aria-controls="form-step-1" aria-selected="true">
+                                    href="#form-step-1" role="tab" aria-controls="form-step-1" aria-selected="true"
+                                    style="pointer-events: none;">
                                     <div class="d-flex align-items-center">
                                         <div class="step-number rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
                                             style="width: 30px; height: 30px;">1</div>
@@ -34,7 +35,8 @@
                                 </div>
                                 <!-- Step 2 -->
                                 <a class="nav-link nav-tabs" id="form-step-2-tab" data-bs-toggle="pill"
-                                    href="#form-step-2" role="tab" aria-controls="form-step-2" aria-selected="false">
+                                    href="#form-step-2" role="tab" aria-controls="form-step-2" aria-selected="false"
+                                    style="pointer-events: none;">
                                     <div class="d-flex align-items-center">
                                         <div class="step-number rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
                                             style="width: 30px; height: 30px;">2</div>
@@ -46,7 +48,8 @@
                                 </div>
                                 <!-- Step 3 -->
                                 <a class="nav-link nav-tabs" id="form-step-3-tab" data-bs-toggle="pill"
-                                    href="#form-step-3" role="tab" aria-controls="form-step-3" aria-selected="false">
+                                    href="#form-step-3" role="tab" aria-controls="form-step-3" aria-selected="false"
+                                    style="pointer-events: none;">
                                     <div class="d-flex align-items-center">
                                         <div class="step-number rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
                                             style="width: 30px; height: 30px;">3</div>
@@ -58,7 +61,8 @@
                                 </div>
                                 <!-- Step 4 -->
                                 <a class="nav-link nav-tabs" id="form-step-4-tab" data-bs-toggle="pill"
-                                    href="#form-step-4" role="tab" aria-controls="form-step-4" aria-selected="false">
+                                    href="#form-step-4" role="tab" aria-controls="form-step-4" aria-selected="false"
+                                    style="pointer-events: none;">
                                     <div class="d-flex align-items-center">
                                         <div class="step-number rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
                                             style="width: 30px; height: 30px;">4</div>
@@ -131,19 +135,22 @@
                                     <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
                                         placeholder="Enter your full name" required>
                                     <small class="form-text text-muted">Please provide your full legal name.</small>
+                                    <div class="error-nama_lengkap invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="nik" class="form-label">NIK (National Identity Number)</label>
-                                    <input type="text" class="form-control" id="nik" name="nik"
+                                    <input type="number" class="form-control" id="nik" name="nik"
                                         placeholder="Enter your NIK" required>
                                     <small class="form-text text-muted">Your 16-digit National Identity
                                         Number.</small>
+                                        <div class="error-nik invalid-feedback"></div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md">
                                         <label for="tempat_lahir" class="form-label">Place of Birth</label>
                                         <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
                                             placeholder="Enter your place of birth" required>
+                                            <div class="error-tempat_lahir invalid-feedback"></div>
                                     </div>
                                     <div class="col-md mb-3">
                                         <label for="tanggal_lahir" class="form-label">Date of Birth</label>
@@ -159,12 +166,14 @@
                                         <option value="Laki-laki">Male</option>
                                         <option value="Perempuan">Female</option>
                                     </select>
+                                    <div class="error-nama_lengkap invalid-feedback"></div>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="nomor_telepon" class="form-label">Phone Number</label>
                                     <input type="tel" class="form-control" id="nomor_telepon" name="nomor_telepon"
                                         placeholder="Enter your phone number" required>
+                                        <div class="error-nomor_telepon invalid-feedback"></div>
                                 </div>
                                 <!-- Province, City, District, and Sub-district grouped in one row -->
                                 <div class="row mb-3">
@@ -202,6 +211,7 @@
                                     <label for="alamat" class="form-label">Address</label>
                                     <textarea class="form-control" id="alamat" name="alamat" rows="2"
                                         placeholder="Enter your full address" required></textarea>
+                                        <div class="error-alamat invalid-feedback"></div>
                                 </div>
 
                                 <!-- Navigation buttons -->
@@ -224,11 +234,13 @@
                                         placeholder="Enter your business name" required>
                                     <small class="form-text text-muted">Please provide your business's official
                                         name.</small>
+                                        <div class="error-alamat invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="nib" class="form-label">NIB (Optional)</label>
                                     <input type="text" class="form-control" id="nib" name="nib"
                                         placeholder="Enter NIB if available">
+                                        <div class="error-nib invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="deskripsi_usaha" class="form-label">Business Description</label>
@@ -236,21 +248,25 @@
                                         placeholder="Describe your business" required></textarea>
                                     <small class="form-text text-muted">Provide a brief description of your
                                         business.</small>
+                                        <div class="error-deskripsi_usaha invalid-feedback"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label for="umkm_category_id" class="form-label">Business Category</label>
-                                        <select class="form-select" id="umkm_category_id" name="umkm_category_id" required>
+                                        <select class="form-select" id="umkm_category_id" name="umkm_category_id"
+                                            required>
                                             <option value="" disabled selected>Select Business Category</option>
                                             @foreach($umkmCategories as $category)
                                             <option value="{{ $category->id }}">{{ $category->nama }}</option>
                                             @endforeach
                                         </select>
+                                        <div class="error-umkm_category_id invalid-feedback"></div>
                                     </div>
                                     <div class="col-md mb-3">
                                         <label for="tanggal_berdiri" class="form-label">Establishment Date</label>
                                         <input type="date" class="form-control" id="tanggal_berdiri"
                                             name="tanggal_berdiri" required>
+                                            <div class="error-tanggal_berdiri invalid-feedback"></div>
                                     </div>
                                 </div>
                                 <hr class="my-3">
@@ -290,55 +306,72 @@
                                         <label for="rt" class="form-label">RT</label>
                                         <input type="text" class="form-control" id="rt" name="rt" placeholder="Enter RT"
                                             maxlength="5" required>
+                                            <div class="error-rt invalid-feedback"></div>
                                     </div>
                                     <div class="col-md mb-3">
                                         <label for="rw" class="form-label">RW</label>
                                         <input type="text" class="form-control" id="rw" name="rw" placeholder="Enter RW"
                                             maxlength="5" required>
+                                            <div class="error-rw invalid-feedback"></div>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="alamat_usaha" class="form-label">Business Address</label>
                                     <textarea class="form-control" id="alamat_usaha" name="alamat_usaha"
                                         placeholder="Enter your business address" maxlength="100" required></textarea>
+                                        <div class="error-alamat_usaha invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="koordinat_usaha" class="form-label">Business Coordinates (Google
                                         Maps)</label>
                                     <input type="text" class="form-control" id="kordinat_usaha" name="kordinat_usaha"
                                         placeholder="Paste Google Maps link here" required>
+                                        <div class="error-kordinat_usaha invalid-feedback"></div>
                                 </div>
 
                                 <hr class="my-3">
 
                                 <!-- Financial Data -->
                                 <h4>Financial Data</h4>
+
                                 <div class="mb-3">
                                     <label for="modal_usaha" class="form-label">Business Capital</label>
-                                    <input type="number" class="form-control" id="modal_usaha" name="modal_usaha"
-                                        placeholder="Enter your business capital" min="0" max="99999999999999.99"
-                                        step="0.01" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Rp.</span>
+                                        <input type="text" class="form-control rupiah-input" id="modal_usaha" name="modal_usaha"
+                                            placeholder="Enter your business capital" required>
+                                            <div class="error-modal_usaha invalid-feedback"></div>
+                                    </div>
                                 </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="asset_usaha" class="form-label">Business Assets</label>
-                                    <input type="number" class="form-control" id="asset_usaha" name="asset_usaha"
-                                        placeholder="Enter your business assets" min="0" max="99999999999999.99"
-                                        step="0.01" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Rp.</span>
+                                        <input type="text" class="form-control rupiah-input" id="asset_usaha" name="asset_usaha"
+                                            placeholder="Enter your business assets" required>
+                                            <div class="error-asset_usaha invalid-feedback"></div>
+                                    </div>
                                 </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="penghasilan_bulanan" class="form-label">Monthly Income</label>
-                                    <input type="number" class="form-control" id="penghasilan_bulanan"
-                                        name="penghasilan_bulanan" placeholder="Enter your monthly income" min="0"
-                                        max="99999999999999.99" step="0.01" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Rp.</span>
+                                        <input type="text" class="form-control rupiah-input" id="penghasilan_bulanan" name="penghasilan_bulanan"
+                                            placeholder="Enter your monthly income" required>
+                                            <div class="error-penghasilan_bulanan invalid-feedback"></div>
+                                    </div>
                                 </div>
-
+                                
                                 <div class="mb-3">
                                     <label for="penghasilan_tahunan" class="form-label">Annual Income</label>
-                                    <input type="number" class="form-control" id="penghasilan_tahunan"
-                                        name="penghasilan_tahunan" placeholder="Enter your annual income" min="0"
-                                        max="99999999999999.99" step="0.01" required>
+                                    <div class="input-group">
+                                        <span class="input-group-text">Rp.</span>
+                                        <input type="text" class="form-control rupiah-input" id="penghasilan_tahunan" name="penghasilan_tahunan"
+                                            placeholder="Enter your annual income" required>
+                                            <div class="error-penghasilan_tahunan invalid-feedback"></div>
+                                    </div>
                                 </div>
 
                                 <div class="mb-3">
@@ -346,8 +379,8 @@
                                     <input type="number" class="form-control" id="jumlah_tenaga_kerja"
                                         name="jumlah_tenaga_kerja" placeholder="Enter the number of employees" min="0"
                                         required>
+                                        <div class="error-jumlah_tenaga_kerja invalid-feedback"></div>
                                 </div>
-
                                 <div class="d-flex justify-content-between">
                                     <button class="btn btn-primary btn-prev" type="button">Previous</button>
                                     <button class="btn btn-primary btn-next" type="button">Next</button>
@@ -367,7 +400,10 @@
                                     </h2>
                                     <h3 class="mt-0">Thank you !</h3>
 
-                                    <p class="mb-2">Anda telah berhasil melengkapi data UMKM Anda. Data yang Anda masukkan akan digunakan untuk proses verifikasi dan pendaftaran UMKM di sistem kami. Silahkan pastikan semua informasi yang telah Anda isi benar dan akurat.</p>
+                                    <p class="mb-2">Anda telah berhasil melengkapi data UMKM Anda. Data yang Anda
+                                        masukkan akan digunakan untuk proses verifikasi dan pendaftaran UMKM di sistem
+                                        kami. Silahkan pastikan semua informasi yang telah Anda isi benar dan akurat.
+                                    </p>
 
                                     <div class="mb-3">
                                         <div class="form-check d-inline-block mb-3">
@@ -713,5 +749,47 @@
     }
 
 });
+</script>
+
+<script>
+    // Fungsi untuk memformat angka ke format rupiah
+    function formatRupiah(angka) {
+        let number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+        if (ribuan) {
+            let separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        return split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+    }
+
+    // Fungsi untuk menghapus format rupiah (pemisah titik) sebelum submit
+    function cleanRupiah(angka) {
+        return angka.replace(/\./g, '');  // Hapus semua titik dari angka
+    }
+
+    // Fungsi untuk mengaplikasikan format ketika user mengetik
+    function applyRupiahFormat(element) {
+        element.addEventListener('input', function(e) {
+            e.target.value = formatRupiah(e.target.value);
+        });
+    }
+
+    // Terapkan format pada semua input yang memerlukan format rupiah
+    document.querySelectorAll('.rupiah-input').forEach(function(input) {
+        applyRupiahFormat(input);
+    });
+
+    // Hapus titik saat form di-submit
+    document.getElementById('financial-form').addEventListener('submit', function(e) {
+        document.querySelectorAll('.rupiah-input').forEach(function(input) {
+            input.value = cleanRupiah(input.value);  // Hapus titik-titik
+        });
+    });
 </script>
 @endsection

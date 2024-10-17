@@ -38,7 +38,7 @@
     <div class="container">
 
         <!-- logo -->
-        <a href="index.html" class="navbar-brand me-lg-5">
+        <a href="{{ route('home') }}" class="navbar-brand me-lg-5">
             <img src="{{ asset('storage/configuration/' . $configuration->logo) }}" alt="" class="logo-dark" height="30" />
         </a>
 

@@ -10,25 +10,21 @@
             <div class="col-md-5">
                 <div class="mt-1">
                     <div>
-                        <h4 class="text-white-50 ms-1">Welcome to</h4>
+                        <h4 class="text-white-50 ms-1">{{ $heroContent->title }}</h4>
                     </div>
-                    <h2 class="h1 text-white fw-normal mb-4 mt-3 hero-title">
-                        Sistem Manajemen Database dan Pelayanan Usaha UMKM Kota Bogor
-                    </h2>
+                    <h2 class="h1 text-white fw-normal mb-4 mt-3 hero-title">{{ $heroContent->subtitle }}</h2>
 
                     <p class="mb-4 font-16 text-white-50">
-                        "Memfasilitasi pengelolaan database UMKM, pemantauan keuangan, dan pengelompokan wilayah
-                        administratif. Sistem ini mendukung efisiensi operasional, transparansi, serta memudahkan
-                        registrasi dan pengawasan UMKM di Kota Bogor."
+                        {{ $heroContent->description }}
                     </p>
 
-                    <a href="{{ route('data-umkm')}}" class="btn btn-success">Selengkapnya <i
+                    <a href="{{ route('data-umkm')}}" class="btn btn-success">Lihat data UMKM <i
                             class="mdi mdi-arrow-right ms-1"></i></a>
                 </div>
             </div>
             <div class="col-md-5 offset-md-2">
                 <div class="text-md-end mt-3 mt-md-0">
-                    <img src="assets/images/startup.svg" alt="" class="img-fluid" />
+                    <img src="{{ asset('storage/hero/' . $heroContent->image) }}" alt="" class="img-fluid" />
                 </div>
             </div>
         </div>
@@ -41,42 +37,59 @@
     <div class="container">
         <div class="row pb-3 pt-5 align-items-center">
             <div class="col-lg-6 col-md-5">
-                <h2 class="fw-bold ">About Us</h2>
-                <p class="text-muted mt-3">Sistem Operasional Layanan Usaha UMKM Kota Bogor adalah platform digital yang
-                    dirancang untuk mendukung pengelolaan dan pengawasan usaha mikro, kecil, dan menengah (UMKM) di Kota
-                    Bogor. Kami hadir untuk mempermudah proses pendaftaran usaha dan memperkuat transparansi dalam
-                    pengelolaan data.</p>
+                <h2 class="fw-bold">{{ $aboutUs->title}}</h2>
+
+                <!-- Tampilkan Deskripsi dari Database -->
+                <p class="text-muted mt-3">
+                    {{ $aboutUs->description ?? 'Sistem Operasional Layanan Usaha UMKM Kota Bogor adalah platform
+                    digital yang dirancang untuk mendukung pengelolaan dan pengawasan usaha mikro, kecil, dan menengah
+                    (UMKM) di Kota Bogor. Kami hadir untuk mempermudah proses pendaftaran usaha dan memperkuat
+                    transparansi dalam pengelolaan data.' }}
+                </p>
 
                 <h5 class="text-muted mt-3">Fokus Kami:</h5>
 
                 <div class="mt-1">
+                    @php
+                    $focusPoints = json_decode($aboutUs->focus_points ?? '[]', true);
+                    @endphp
+
+                    @if(!empty($focusPoints))
+                    <!-- Loop untuk menampilkan setiap focus point -->
+                    @foreach($focusPoints as $focusPoint)
+                    <p class="text-muted">
+                        <i class="mdi mdi-circle-medium text-success"></i> {{ $focusPoint }}
+                    </p>
+                    @endforeach
+                    @else
+                    <!-- Fokus default jika tidak ada data dari database -->
                     <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Pengelolaan Database UMKM:
                         Memastikan seluruh data usaha terstruktur dan mudah diakses.</p>
                     <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Pemantauan Keuangan Usaha:
-                        Memonitor perkembangan keuangan UMKM secara akurat dan transparan.
-                    </p>
+                        Memonitor perkembangan keuangan UMKM secara akurat dan transparan.</p>
                     <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Efisiensi Operasional:
-                        Meningkatkan efektivitas pengelolaan data dan registrasi usaha di Kota Bogor.
-                    </p>
+                        Meningkatkan efektivitas pengelolaan data dan registrasi usaha di Kota Bogor.</p>
                     <p class="text-muted"><i class="mdi mdi-circle-medium text-success"></i> Transparansi: Menjamin
-                        keterbukaan dalam pemantauan usaha UMKM.
-                    </p>
+                        keterbukaan dalam pemantauan usaha UMKM.</p>
+                    @endif
                 </div>
 
+                <!-- Tampilkan Komitmen dari Database -->
                 <p class="text-muted mt-3">
-                    Kami berkomitmen untuk mendukung UMKM dalam tumbuh dan berkembang secara optimal di Kota Bogor.
+                    {{ $aboutUs->commitment ?? 'Kami berkomitmen untuk mendukung UMKM dalam tumbuh dan berkembang secara
+                    optimal di Kota Bogor.' }}
                 </p>
-
-                {{-- <a href="#" class="btn btn-success rounded-pill mt-3">Read More <i
-                        class="mdi mdi-arrow-right ms-1"></i></a> --}}
-
             </div>
+
+            <!-- Tampilkan Gambar dari Database -->
             <div class="col-lg-5 col-md-6 offset-md-1">
-                <img src="assets/images/features-2.svg" class="img-fluid" alt="">
+                <img src="{{ $aboutUs->image ? Storage::url('public/about-us/' . $aboutUs->image) : 'assets/images/features-2.svg' }}"
+                    class="img-fluid" alt="About Us Image">
             </div>
         </div>
     </div>
 </section>
+
 <!-- END ABOUT US -->
 
 <!-- START TOP UMKM -->
@@ -86,10 +99,10 @@
             <div class="col-lg-12">
                 <div class="text-center">
                     <h1 class="mt-0 text-primary"><i class="mdi mdi-infinity"></i></h1>
-                    <h3>Latest <span class="text-primary">UMKM Database</span> in <span class="text-primary">Bogor
-                            City</span></h3>
-                    <p class="text-muted mt-2">An Overview of Newly Registered Micro, Small, and Medium Enterprises in
-                        the Database, Supporting Local Economic Growth</p>
+                    <h3>{{$configuration->umkm_title}}</h3>
+                    <p class="text-muted mt-2">
+                        {{$configuration->umkm_title}}
+                    </p>
                 </div>
             </div>
         </div>
@@ -114,6 +127,14 @@
             </div>
             @endforeach
         </div>
+
+        <div class="row mt-4">
+            <div class="col-lg-12 text-center">
+                <a href="{{ route('data-umkm') }}" id="view-umkm-btn" class="btn btn-primary shadow rounded-pill">
+                    <i class="mdi mdi-eye-outline me-2"></i> Lihat Seluruh UMKM
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 <!-- END TOP UMKM -->
@@ -125,58 +146,34 @@
             <div class="col-lg-12">
                 <div class="text-center">
                     <h1 class="mt-0"><i class="mdi mdi-frequently-asked-questions"></i></h1>
-                    <h3>Frequently Asked <span class="text-primary">Questions</span></h3>
-                    <p class="text-muted mt-2">Here are some of the most common questions about the UMKM Database
-                        System. For more information, feel free to reach out to us.</p>
+                    <h3>{{$configuration->faq_title}}</h3>
+                    <p class="text-muted mt-2">{{ $configuration->faq_subtitle}}</p>
 
-                    <button type="button" class="btn btn-success btn-sm mt-2"><i class="mdi mdi-email-outline me-1"></i>
-                        Email us your question</button>
-                    <button type="button" class="btn btn-info btn-sm mt-2 ms-1"><i class="mdi mdi-whatsapp me-1"></i>
-                        Send us a WhatsApp</button>
+                    <a href="mailto:{{$configuration->email}}" target="_blank">
+                        <button type="button" class="btn btn-success btn-sm mt-2"><i
+                                class="mdi mdi-email-outline me-1"></i>
+                            Email us your question</button>
+                    </a>
+                    <a href="{{$configuration->link_whatsapp}}" target="_blank">
+                        <button type="button" class="btn btn-info btn-sm mt-2 ms-1"><i
+                                class="mdi mdi-whatsapp me-1"></i>
+                            Send us a WhatsApp</button>
+                    </a>
                 </div>
             </div>
         </div>
 
         <div class="row mt-5">
-            <div class="col-lg-5 offset-lg-1">
-                <!-- Pertanyaan/Jawaban -->
+            @foreach($faqs as $index => $faq)
+            <div class="col-lg-5 {{ $index % 2 == 0 ? 'offset-lg-1' : '' }}">
                 <div>
                     <div class="faq-question-q-box">Q.</div>
-                    <h4 class="faq-question text-body">Bagaimana cara mendaftar UMKM di sistem ini?</h4>
-                    <p class="faq-answer mb-4 pb-1 text-muted">Anda dapat mendaftar UMKM dengan membuat akun di platform
-                        kami dan mengisi formulir pendaftaran usaha. Setelah mengisi data usaha, Anda akan menerima
-                        konfirmasi melalui email.</p>
-                </div>
-
-                <!-- Pertanyaan/Jawaban -->
-                <div>
-                    <div class="faq-question-q-box">Q.</div>
-                    <h4 class="faq-question text-body">Dokumen apa yang diperlukan untuk pendaftaran?</h4>
-                    <p class="faq-answer mb-4 pb-1 text-muted">Anda perlu menyediakan salinan identitas usaha (NIB) dan
-                        bukti alamat usaha. Dokumen ini dapat diunggah selama proses pendaftaran.</p>
+                    <h4 class="faq-question text-body">{{ $faq->question }}</h4>
+                    <p class="faq-answer mb-4 pb-1 text-muted">{{ $faq->answer }}</p>
                 </div>
             </div>
             <!--/col-lg-5 -->
-
-            <div class="col-lg-5">
-                <!-- Pertanyaan/Jawaban -->
-                <div>
-                    <div class="faq-question-q-box">Q.</div>
-                    <h4 class="faq-question text-body">Apakah ada biaya untuk mendaftar UMKM?</h4>
-                    <p class="faq-answer mb-4 pb-1 text-muted">Tidak, proses pendaftaran UMKM dalam sistem ini
-                        sepenuhnya gratis.</p>
-                </div>
-
-                <!-- Pertanyaan/Jawaban -->
-                <div>
-                    <div class="faq-question-q-box">Q.</div>
-                    <h4 class="faq-question text-body">Bagaimana cara memperbarui informasi usaha saya?</h4>
-                    <p class="faq-answer mb-4 pb-1 text-muted">Setelah masuk, Anda dapat memperbarui detail usaha dengan
-                        mengakses bagian 'Usaha Saya' dan mengedit kolom yang diperlukan. Pembaruan akan langsung
-                        terlihat.</p>
-                </div>
-            </div>
-            <!--/col-lg-5-->
+            @endforeach
         </div>
         <!-- end row -->
     </div> <!-- end container-->
@@ -189,9 +186,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-center">
-                    <h3>Get <span class="text-primary">In</span> Touch</h3>
-                    <p class="text-muted mt-2">Please fill out the form below, and we will get back to you shortly. For
-                        further information, feel free to reach out to us.
+                    <h3>{{$configuration->contact_title}}</h3>
+                    <p class="text-muted mt-2">
+                        {{$configuration->contact_subtitle}}
                     </p>
                 </div>
             </div>
@@ -200,11 +197,11 @@
         <div class="row align-items-center mt-3">
             <div class="col-md-4">
                 <p class="text-muted"><span class="fw-bold">Dukungan Pelanggan:</span><br> <span
-                        class="d-block mt-1">+62 857 1761 3102</span></p>
+                        class="d-block mt-1">{{$configuration->no_hp}}</span></p>
                 <p class="text-muted mt-4"><span class="fw-bold">Alamat Email:</span><br> <span
-                        class="d-block mt-1">umkmbogor@gmail.com</span></p>
+                        class="d-block mt-1">{{$configuration->email}}</span></p>
                 <p class="text-muted mt-4"><span class="fw-bold">Alamat Kantor:</span><br> <span
-                        class="d-block mt-1">Bogor</span></p>
+                        class="d-block mt-1">{{$configuration->alamat_teks}}</span></p>
             </div>
 
             <div class="col-md-8">
@@ -274,8 +271,51 @@
 
 @endsection
 
+@section('styles')
+<!-- Tambahkan style ini -->
+<style>
+    #view-umkm-btn {
+        transition: all 0.3s ease;
+        background-color: #007bff;
+        color: white;
+    }
+
+    #view-umkm-btn:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.5);
+    }
+
+    #view-umkm-btn.btn-clicked {
+        animation: clickEffect 0.3s ease-in-out;
+    }
+
+    @keyframes clickEffect {
+        0% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(0.95);
+        }
+
+        100% {
+            transform: scale(1);
+        }
+    }
+</style>
+@endsection
+
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('view-umkm-btn').addEventListener('click', function() {
+        this.classList.add('btn-clicked');
+        setTimeout(() => {
+            this.classList.remove('btn-clicked');
+        }, 300); // Durasi animasi
+    });
+</script>
 @if(session('success'))
 <script>
     Swal.fire({

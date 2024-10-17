@@ -59,6 +59,7 @@ class AuthController extends Controller
         // Jika gagal login, kembalikan dengan pesan error
         return redirect()->back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
+            'password' => 'Password do not match'
         ])->withInput(); // Agar input tetap terisi
     }
 
