@@ -33,7 +33,4 @@
     @yield('scripts')
 </body>
 
-
-<!-- Mirrored from coderthemes.com/hyper/saas/landing.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Jul 2022 10:21:23 GMT -->
-
 </html>

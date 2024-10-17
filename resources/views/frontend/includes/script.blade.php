@@ -52,4 +52,4 @@ window.onscroll = function() {
             // Panggil updateActiveLink saat halaman digulir
             window.addEventListener("scroll", updateActiveLink);
         });
-</script>       
+</script>

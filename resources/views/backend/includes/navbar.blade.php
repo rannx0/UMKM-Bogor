@@ -1,7 +1,7 @@
 <!-- Topbar Start -->
 <div class="navbar-custom">
     <ul class="list-unstyled topbar-menu float-end mb-0">
-        <li class="dropdown notification-list d-lg-none">
+        {{-- <li class="dropdown notification-list d-lg-none">
             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
                 aria-haspopup="false" aria-expanded="false">
                 <i class="dripicons-search noti-icon"></i>
@@ -151,17 +151,14 @@
                 </a>
 
             </div>
-        </li>
+        </li> --}}
 
-        <li class="dropdown notification-list">
-            <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown" href="#"
-                role="button" aria-haspopup="false" aria-expanded="false">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle bg-transparent m-1 me-4" href="#" id="userDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="account-user-avatar">
-                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" class="rounded-circle">
-                </span>
-                <span>
-                    <span class="account-user-name">Dominic Keller</span>
-                    <span class="account-position">Founder</span>
+                    <img src="{{ asset('assets/images/users/avatar-1.jpg')}}" alt="user-image" class="rounded-circle"
+                        style="width: 50px">
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
@@ -211,7 +208,7 @@
     <button class="button-menu-mobile open-left">
         <i class="mdi mdi-menu"></i>
     </button>
-    <div class="app-search dropdown d-none d-lg-block">
+    {{-- <div class="app-search dropdown d-none d-lg-block">
         <form>
             <div class="input-group">
                 <input type="text" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
@@ -220,7 +217,7 @@
             </div>
         </form>
 
-        {{-- <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
+        <div class="dropdown-menu dropdown-menu-animated dropdown-lg" id="search-dropdown">
             <!-- item-->
             <div class="dropdown-header noti-title">
                 <h5 class="text-overflow mb-2">Found <span class="text-danger">17</span> results</h5>
@@ -274,7 +271,7 @@
                     </div>
                 </a>
             </div>
-        </div> --}}
-    </div>
+        </div>
+    </div> --}}
 </div>
 <!-- end Topbar -->

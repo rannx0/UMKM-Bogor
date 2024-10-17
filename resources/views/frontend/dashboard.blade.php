@@ -86,30 +86,32 @@
             <div class="col-lg-12">
                 <div class="text-center">
                     <h1 class="mt-0 text-primary"><i class="mdi mdi-infinity"></i></h1>
-                    <h3>Latest <span class="text-primary">UMKM Database</span> in <span class="text-primary">Bogor City</span></h3>
-                    <p class="text-muted mt-2">An Overview of Newly Registered Micro, Small, and Medium Enterprises in the Database, Supporting Local Economic Growth</p>
+                    <h3>Latest <span class="text-primary">UMKM Database</span> in <span class="text-primary">Bogor
+                            City</span></h3>
+                    <p class="text-muted mt-2">An Overview of Newly Registered Micro, Small, and Medium Enterprises in
+                        the Database, Supporting Local Economic Growth</p>
                 </div>
             </div>
         </div>
 
         <div class="row">
             @foreach ($topCategories as $index => $category)
-                <div class="col-lg-4 col-md-6">
-                    <div class="card category-card text-center shadow-sm border-0 p-4 my-3">
-                        <a href="{{ route('data-umkm') }}">
+            <div class="col-lg-4 col-md-6">
+                <div class="card category-card text-center shadow-sm border-0 p-4 my-3">
+                    <a href="{{ route('data-umkm') }}">
                         <div class="avatar-sm m-auto mb-3">
                             <!-- Membungkus icon dengan link ke route 'data-umkm' -->
-                                <span class="avatar-title bg-primary-lighten rounded-circle icon-circle">
-                                    <i class="text-primary font-24">{{ $index + 1 }}</i>
-                                </span>
-                            </div>
-                            <h4 class="mt-3">{{ $category->nama }}</h4>
-                            <p class="text-muted mt-2 mb-0">
-                                Total UMKM: {{ $category->usaha_count }}
-                            </p>
-                        </a>
-                    </div>
+                            <span class="avatar-title bg-primary-lighten rounded-circle icon-circle">
+                                <i class="text-primary font-24">{{ $index + 1 }}</i>
+                            </span>
+                        </div>
+                        <h4 class="mt-3">{{ $category->nama }}</h4>
+                        <p class="text-muted mt-2 mb-0">
+                            Total UMKM: {{ $category->usaha_count }}
+                        </p>
+                    </a>
                 </div>
+            </div>
             @endforeach
         </div>
     </div>
@@ -183,12 +185,13 @@
 
 <!-- START CONTACT -->
 <section class="py-5 bg-light-lighten border-top border-bottom border-light" id="contact-us">
-    <div class="container" >
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="text-center">
                     <h3>Get <span class="text-primary">In</span> Touch</h3>
-                    <p class="text-muted mt-2">Please fill out the form below, and we will get back to you shortly. For further information, feel free to reach out to us.
+                    <p class="text-muted mt-2">Please fill out the form below, and we will get back to you shortly. For
+                        further information, feel free to reach out to us.
                     </p>
                 </div>
             </div>
@@ -196,24 +199,41 @@
 
         <div class="row align-items-center mt-3">
             <div class="col-md-4">
-                <p class="text-muted"><span class="fw-bold">Dukungan Pelanggan:</span><br> <span class="d-block mt-1">+62 857 1761 3102</span></p>
-                <p class="text-muted mt-4"><span class="fw-bold">Alamat Email:</span><br> <span class="d-block mt-1">umkmbogor@gmail.com</span></p>
-                <p class="text-muted mt-4"><span class="fw-bold">Alamat Kantor:</span><br> <span class="d-block mt-1">Bogor</span></p>
+                <p class="text-muted"><span class="fw-bold">Dukungan Pelanggan:</span><br> <span
+                        class="d-block mt-1">+62 857 1761 3102</span></p>
+                <p class="text-muted mt-4"><span class="fw-bold">Alamat Email:</span><br> <span
+                        class="d-block mt-1">umkmbogor@gmail.com</span></p>
+                <p class="text-muted mt-4"><span class="fw-bold">Alamat Kantor:</span><br> <span
+                        class="d-block mt-1">Bogor</span></p>
             </div>
 
             <div class="col-md-8">
-                <form>
+
+                <form action="{{ route('contact.send') }}" method="POST">
+                    @if(session('success'))
+                    <script>
+                        Swal.fire({
+                            title: 'Sukses!',
+                            text: '{{ session('success') }}',
+                            icon: 'success',
+                            confirmButtonText: 'Ok'
+                        });
+                    </script>
+                    @endif
+                    @csrf
                     <div class="row mt-4">
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label for="fullname" class="form-label">Nama Anda</label>
-                                <input class="form-control form-control-light" type="text" id="fullname" placeholder="Nama...">
+                                <input class="form-control form-control-light" type="text" name="fullname" id="fullname"
+                                    placeholder="Nama..." required>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="mb-2">
                                 <label for="emailaddress" class="form-label">Email Anda</label>
-                                <input class="form-control form-control-light" type="email" required="" id="emailaddress" placeholder="Masukkan email Anda...">
+                                <input class="form-control form-control-light" type="email" name="email"
+                                    id="emailaddress" placeholder="Masukkan email Anda..." required>
                             </div>
                         </div>
                     </div>
@@ -222,7 +242,8 @@
                         <div class="col-lg-12">
                             <div class="mb-2">
                                 <label for="subject" class="form-label">Subjek</label>
-                                <input class="form-control form-control-light" type="text" id="subject" placeholder="Masukkan subjek...">
+                                <input class="form-control form-control-light" type="text" name="subject" id="subject"
+                                    placeholder="Masukkan subjek..." required>
                             </div>
                         </div>
                     </div>
@@ -231,21 +252,38 @@
                         <div class="col-lg-12">
                             <div class="mb-2">
                                 <label for="comments" class="form-label">Pesan</label>
-                                <textarea id="comments" rows="4" class="form-control form-control-light" placeholder="Ketik pesan Anda di sini..."></textarea>
+                                <textarea id="comments" name="comments" rows="4" class="form-control form-control-light"
+                                    placeholder="Ketik pesan Anda di sini..." required></textarea>
                             </div>
                         </div>
                     </div>
 
                     <div class="row mt-2">
                         <div class="col-12 text-end">
-                            <button class="btn btn-primary">Kirim Pesan <i class="mdi mdi-telegram ms-1"></i></button>
+                            <button class="btn btn-primary" type="submit">Kirim Pesan <i
+                                    class="mdi mdi-telegram ms-1"></i></button>
                         </div>
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </section>
 <!-- END CONTACT -->
 
+@endsection
+
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if(session('success'))
+<script>
+    Swal.fire({
+        title: 'Sukses!',
+        text: '{{ session('success') }}',
+        icon: 'success',
+        confirmButtonText: 'Ok'
+    });
+</script>
+@endif
 @endsection

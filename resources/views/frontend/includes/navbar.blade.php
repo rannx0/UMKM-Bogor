@@ -39,7 +39,7 @@
 
         <!-- logo -->
         <a href="index.html" class="navbar-brand me-lg-5">
-            <img src="assets/images/logo.png" alt="" class="logo-dark" height="30" />
+            <img src="{{ asset('storage/configuration/' . $configuration->logo) }}" alt="" class="logo-dark" height="30" />
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"

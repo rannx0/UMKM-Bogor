@@ -19,7 +19,12 @@ use App\Http\Controllers\PersonalDataController;
 use App\http\Controllers\UsahaController;
 use App\Http\Controllers\UserDataController;
 use App\Http\Controllers\DatatableUmkmController;
-use App\http\controllers\DashboardFrontendController;
+use App\http\Controllers\DashboardFrontendController;
+use App\http\Controllers\ConfigurationControllers;
+use App\Http\Controllers\HeroContentController;
+use App\http\Controllers\AboutUsController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +60,7 @@ Route::get('/data-umkm', [DatatableUmkmController::class, 'umkmdatatable'])->nam
 Route::get('/data-umkm/{nama_kecamatan}/{id}', [DatatableUmkmController::class, 'showKecamatanUmkm'])->name('kecamatan.umkm');
 Route::get('/data-umkm/{nama_kecamatan}/{nama_usaha}/{id}', [DatatableUmkmController::class, 'showUmkmDetail'])->name('detail.umkm');
 
+Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 Route::get('/propil', function () {
     return view('frontend.pages.data-umkm.umkm-profile');
@@ -103,6 +109,28 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
     Route::get('/userdata/{id}/personal', [UserDataController::class, 'showPersonalData'])->name('userdata.personalData');
     Route::get('/userdata/{id}/usaha', [UserDataController::class, 'showUsaha'])->name('userdata.usaha');
     Route::get('/userdata/{id}/keuangan', [UserDataController::class, 'showKeuangan'])->name('userdata.keuangan');
+
+    // Configurations
+    Route::get('/configuration/{id?}', [ConfigurationControllers::class, 'index'])->name('configuration.index');
+    Route::post('/configuration', [ConfigurationControllers::class, 'store'])->name('configuration.store');
+
+    // Hero Content
+    Route::get('/hero-content', [HeroContentController::class, 'index'])->name('hero.index');
+    Route::post('/hero-content', [HeroContentController::class, 'store'])->name('hero.store');
+
+    // About Us
+    Route::get('/about-us', [AboutUsController::class, 'index'])->name('about.index');
+    Route::post('/about-us', [AboutUsController::class, 'store'])->name('about.store');
+
+    // FAQ
+    Route::get('/faqs', [FaqController::class, 'index'])->name('faqs.index');
+    Route::get('/faqs/create', [FaqController::class, 'create'])->name('faqs.create');
+    Route::post('/faqs', [FaqController::class, 'store'])->name('faqs.store');
+    Route::get('/faqs/{id}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
+    Route::put('/faqs/{id}', [FaqController::class, 'update'])->name('faqs.update');
+    Route::delete('/faqs/{id}', [FaqController::class, 'destroy'])->name('faqs.destroy');
+
+
 });
 
 // Manager Routes - Only for 'Manager' role

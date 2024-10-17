@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Landing Page | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
+    <title>@yield('title')</title>
 
     @include('frontend.includes.head')
     @yield('styles')

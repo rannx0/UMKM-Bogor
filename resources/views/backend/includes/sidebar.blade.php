@@ -4,7 +4,7 @@
     <!-- LOGO -->
     <a href="index.html" class="logo text-center logo-light">
         <span class="logo-lg">
-            <img src="{{ asset('assets/images/logo.png')}}" alt="" height="30">
+            <img src="{{ asset('storage/configuration/' . $configuration->logo) }}" alt="" height="30">
         </span>
     </a>
 
@@ -90,10 +90,31 @@
             <li class="side-nav-title side-nav-item mt-2">Apps</li>
 
             <li class="side-nav-item">
-                <a data-bs-toggle="collapse" href="#" aria-expanded="false" aria-controls="sidebarDashboards"
+                <a href="{{ route('configuration.index')}}"
                     class="side-nav-link">
                     <i class="uil uil-cog"></i>
                     <span>Configuration </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ route('hero.index')}}"
+                    class="side-nav-link">
+                    <i class="uil uil-cog"></i>
+                    <span>Hero Content </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ route('about.index')}}"
+                    class="side-nav-link">
+                    <i class="uil uil-cog"></i>
+                    <span>About Us </span>
+                </a>
+            </li>
+            <li class="side-nav-item">
+                <a href="{{ route('faqs.index')}}"
+                    class="side-nav-link">
+                    <i class="uil uil-cog"></i>
+                    <span>FAQs </span>
                 </a>
             </li>
 

@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UmkmCategory; // Pastikan model KategoriUmkm di-import
+use App\Models\UmkmCategory;
+use App\Models\AboutUs;
+use App\Models\ContactMessage;
+use App\Models\Faq;
+use App\Models\HeroContent;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class DashboardFrontendController extends Controller
@@ -13,9 +18,12 @@ class DashboardFrontendController extends Controller
         ->orderBy('usaha_count', 'desc')
         ->limit(6)
         ->get();
+
+        
     
+        $aboutUs = AboutUs::find(1);
 
         // Kirim data ke view
-        return view('frontend.dashboard', compact('topCategories'));
+        return view('frontend.dashboard', compact('topCategories', 'aboutUs'));
     }
 }
