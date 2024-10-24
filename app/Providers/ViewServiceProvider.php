@@ -8,6 +8,8 @@ use App\Models\Configuration;
 use App\Models\HeroContent;
 use App\Models\AboutUs;
 use App\Models\Faq;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Profile;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,21 @@ class ViewServiceProvider extends ServiceProvider
 
         // Membagikan data konfigurasi ke semua view
         View::share('configuration', $configuration);
+
+        // Membagikan profil pengguna yang sedang masuk ke semua view
+        View::composer('*', function ($view) {
+            if (Auth::check()) {
+                $user = Auth::user();
+                $profile = $user->profile;
+                // Jika profil tidak ada, buat profil kosong
+                if (!$profile) {
+                    $profile = Profile::create(['user_id' => $user->id]);
+                }
+                $view->with('profile', $profile);
+            }
+        });
+
+        // Komposisi untuk view tertentu
         View::composer('frontend.dashboard', function ($view) {
             $aboutUs = AboutUs::first();
             $faqs = Faq::take(4)->get();

@@ -101,7 +101,7 @@
                     <h1 class="mt-0 text-primary"><i class="mdi mdi-infinity"></i></h1>
                     <h3>{{$configuration->umkm_title}}</h3>
                     <p class="text-muted mt-2">
-                        {{$configuration->umkm_title}}
+                        {{$configuration->umkm_subtitle}}
                     </p>
                 </div>
             </div>
@@ -152,12 +152,12 @@
                     <a href="mailto:{{$configuration->email}}" target="_blank">
                         <button type="button" class="btn btn-success btn-sm mt-2"><i
                                 class="mdi mdi-email-outline me-1"></i>
-                            Email us your question</button>
+                                Kirimkan email kepada kami</button>
                     </a>
                     <a href="{{$configuration->link_whatsapp}}" target="_blank">
                         <button type="button" class="btn btn-info btn-sm mt-2 ms-1"><i
                                 class="mdi mdi-whatsapp me-1"></i>
-                            Send us a WhatsApp</button>
+                                Kirimkan kami WhatsApp</button>
                     </a>
                 </div>
             </div>

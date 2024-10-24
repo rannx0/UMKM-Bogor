@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between">
             <h3>Daftar UMKM di Kecamatan {{ $kecamatan->nama }}</h3>
-            <a href="javascript:history.back()" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('data-umkm') }}" class="btn btn-secondary">Kembali</a>
         </div>
         <div class="card-body table-responsive">
             @if($umkmData->isEmpty())

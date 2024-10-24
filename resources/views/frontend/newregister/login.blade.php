@@ -2,13 +2,22 @@
 
 @section('content')
 <div class="container mt-4">
+
+
     <div class="row justify-content-center">
         <div class="col-xxl-4 col-lg-5">
-            <div class="card shadow-lg animated fadeInUp"> <!-- Animasi fadeInUp -->
+            <div class="card shadow-lg">
+                <!-- Tombol Kembali di Pojok Kiri Atas -->
+                <a href="{{ route('home') }}" class="btn btn-outline-dark btn-sm position-absolute top-0 start-0 m-3 shadow-sm">
+                    <i class="mdi mdi-arrow-left"></i> Back to Home
+                </a>
+                
+                <!-- Animasi fadeInUp -->
                 <!-- Logo -->
-                <div class="pt-4 text-center border-0">
+                <div class="mt-3 pt-4 text-center border-0">
                     <a href="{{ url('/') }}">
-                        <span><img src="{{ asset('assets/images/profile-login-logo.svg') }}" alt="Logo" width="130px" ></span> <!-- Animasi pulse pada logo -->
+                        <span><img src="{{ asset('assets/images/profile-login-logo.svg') }}" alt="Logo" width="130px"
+                                class="pulse"></span> <!-- Animasi pulse pada logo -->
                     </a>
                 </div>
 
@@ -24,7 +33,8 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
                             <input class="form-control @error('email') is-invalid @enderror" type="email" id="email"
-                                name="email" required autofocus placeholder="Enter your email" style="transition: all 0.3s ease;">
+                                name="email" required autofocus placeholder="Enter your email"
+                                style="transition: all 0.3s ease;">
                             @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -57,14 +67,12 @@
                                 <label class="form-check-label" for="checkbox-signin">Remember me</label>
                             </div>
                         </div>
-                        
+
                         <!-- Buttons with Hover Effect -->
-                        <div class="d-flex row justify-content-betweeen">
+                        <div class="d-flex row justify-content-between">
                             <div class="col-md mb-3 mb-0 text-center">
-                                <a href="{{ route('home')}}" class="btn btn-outline-danger btn-hover-effect">Back to home</a> <!-- Tambah hover -->
-                            </div>
-                            <div class="col-md mb-3 mb-0 text-center">
-                                <button class="btn btn-primary px-4 btn-hover-effect" type="submit">Log In</button> <!-- Tambah hover -->
+                                <button class="btn btn-primary px-4 btn-hover-effect" type="submit">Log In</button>
+                                <!-- Tambah hover -->
                             </div>
                         </div>
                     </form>
@@ -75,7 +83,7 @@
             <!-- Sign Up Link -->
             <div class="row mt-3">
                 <div class="col-12 text-center text-white">
-                    <p class="text-white ">Don't have an account?
+                    <p class="text-white">Don't have an account?
                         <a href="{{ route('registration.showForm') }}" class="text-white ms-1"><b>Sign Up</b></a>
                     </p>
                 </div>
@@ -90,31 +98,11 @@
 <!-- CSS Animations -->
 <style>
     body {
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
-    }   
-    .animated {
-        animation-duration: 1s;
-        animation-fill-mode: both;
-    }
-
-    .pulse {
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.05);
-        }
-        100% {
-            transform: scale(1);
-        }
     }
 
     .btn-hover-effect:hover {

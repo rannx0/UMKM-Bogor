@@ -5,7 +5,7 @@
     <div class="tab-pane p-3 shadow-lg border border-primary rounded">
         <div class="d-flex justify-content-between mb-3">
             <h2>Data Umkm</h2>
-            <a href="javascript:history.back()"><i class="mdi mdi-close-thick" style="font-size: 25px;"></i></a>
+            <a href="{{ route('home') }}"><i class="mdi mdi-close-thick" style="font-size: 25px;"></i></a>
         </div>
         <table id="umkm-table" class="table table-hover w-100 nowrap" style="font-size: 13px; color: #333;">
             <thead>

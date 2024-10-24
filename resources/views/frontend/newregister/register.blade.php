@@ -10,7 +10,7 @@
                         <i class="mdi mdi-window-close"></i>
                     </button>
                 </a>
-                <h3 class="h3 mb-3">Register Your UMKM</h3>
+                <h3 class="h3 mb-3">Daftarkan UMKM Anda</h3>
                 <div id="bar" class="progress mb-3" style="height: 7px;">
                     <div class="bar progress-bar progress-bar-striped progress-bar-animated bg-primary"></div>
                 </div>
@@ -27,7 +27,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="step-number rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
                                             style="width: 30px; height: 30px;">1</div>
-                                        <span class="fw-bold d-md-block ms-2">Register Account</span>
+                                        <span class="fw-bold d-md-block ms-2">Daftar Akun</span>
                                     </div>
                                 </a>
                                 <div id="divider-1" class="divider d-none">
@@ -40,7 +40,7 @@
                                     <div class="d-flex align-items-center">
                                         <div class="step-number rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center"
                                             style="width: 30px; height: 30px;">2</div>
-                                        <span class="fw-bold d-md-block ms-2">Personal Data</span>
+                                        <span class="fw-bold d-md-block ms-2">Data Pribadi</span>
                                     </div>
                                 </a>
                                 <div id="divider-2" class="divider d-none">
@@ -81,14 +81,14 @@
                             class="tab-pane form-step fade border border-primary rounded shadow-lg p-3 show active"
                             role="tabpanel" aria-labelledby="form-step-1-tab">
                             <form id="accountForm" class="needs-validation" novalidate>
-                                <h3>Register Account</h3>
+                                <h3>Daftar Akun</h3>
                                 <hr class="mb-3">
                                 <div class="row mb-3">
                                     <label for="name" class="col-3 col-form-label">Username</label>
                                     <div class="col-9">
                                         <input type="text" name="name" class="form-control" id="name"
                                             placeholder="Username" required>
-                                        <div class="invalid-feedback">Please provide a valid name.</div>
+                                        <div class="invalid-feedback">Harap berikan nama yang valid.</div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -96,7 +96,7 @@
                                     <div class="col-9">
                                         <input type="email" name="email" class="form-control" id="email"
                                             placeholder="Email" required>
-                                        <div class="invalid-feedback">Please provide a valid email.</div>
+                                        <div class="invalid-feedback">Harap berikan email yang valid.</div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -107,12 +107,12 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <label for="password_confirmation" class="col-3 col-form-label">Confirm
+                                    <label for="password_confirmation" class="col-3 col-form-label">Konfirmasi
                                         Password</label>
                                     <div class="col-9">
                                         <input type="password" name="password_confirmation" id="password_confirmation"
                                             class="form-control" required>
-                                        <div class="error-password-confirmation invalid-feedback">Confirm Your Password.
+                                        <div class="error-password-confirmation invalid-feedback">Konfirmasi Password.
                                         </div>
                                     </div>
                                 </div>
@@ -131,76 +131,76 @@
                                 <h2 class="mb-3">Personal Data</h2>
                                 <!-- Full Name -->
                                 <div class="mb-3">
-                                    <label for="nama_lengkap" class="form-label">Full Name</label>
+                                    <label for="nama_lengkap" class="form-label">Nama Lengkap</label>
                                     <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
-                                        placeholder="Enter your full name" required>
-                                    <small class="form-text text-muted">Please provide your full legal name.</small>
+                                        placeholder="Masukan Nama Lengkap Anda" required>
+                                    <small class="form-text text-muted">Harap berikan nama lengkap Anda.</small>
                                     <div class="error-nama_lengkap invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="nik" class="form-label">NIK (National Identity Number)</label>
+                                    <label for="nik" class="form-label">NIK (Nomor Induk Kependudukan)</label>
                                     <input type="number" class="form-control" id="nik" name="nik"
-                                        placeholder="Enter your NIK" required>
+                                        placeholder="Masukkan NIK Anda" required>
                                     <small class="form-text text-muted">Your 16-digit National Identity
                                         Number.</small>
                                         <div class="error-nik invalid-feedback"></div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md">
-                                        <label for="tempat_lahir" class="form-label">Place of Birth</label>
+                                        <label for="tempat_lahir" class="form-label">Tempat Lahir</label>
                                         <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
-                                            placeholder="Enter your place of birth" required>
+                                            placeholder="Masukan Tempat Lahir Anda" required>
                                             <div class="error-tempat_lahir invalid-feedback"></div>
                                     </div>
                                     <div class="col-md mb-3">
-                                        <label for="tanggal_lahir" class="form-label">Date of Birth</label>
+                                        <label for="tanggal_lahir" class="form-label">Tangal Lahir</label>
                                         <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
-                                            placeholder="Enter your date of birth" required>
+                                            placeholder="Masukan Tanggal Lahir Anda" required>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="jenis_kelamin" class="form-label">Gender</label>
+                                    <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                     <select class="form-select" id="jenis_kelamin" name="jenis_kelamin" required>
-                                        <option value="" disabled selected>Select Gender</option>
-                                        <option value="Laki-laki">Male</option>
-                                        <option value="Perempuan">Female</option>
+                                        <option value="" disabled selected>Pilih Jenis Kelamin</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
                                     </select>
                                     <div class="error-nama_lengkap invalid-feedback"></div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="nomor_telepon" class="form-label">Phone Number</label>
+                                    <label for="nomor_telepon" class="form-label">Nomor Telepon</label>
                                     <input type="tel" class="form-control" id="nomor_telepon" name="nomor_telepon"
-                                        placeholder="Enter your phone number" required>
+                                        placeholder="Masukan Nomor Telepon Anda" required>
                                         <div class="error-nomor_telepon invalid-feedback"></div>
                                 </div>
                                 <!-- Province, City, District, and Sub-district grouped in one row -->
                                 <div class="row mb-3">
                                     <div class="col-md-3">
-                                        <label for="provinsi_id" class="form-label">Province</label>
+                                        <label for="provinsi_id" class="form-label">Provinsi</label>
                                         <select class="form-select" id="provinsi_id" name="provinsi_id" required>
-                                            <option value="" disabled selected>Select Province</option>
+                                            <option value="" disabled selected>Pilih Provinsi</option>
                                             @foreach($provinsis as $provinsi)
                                             <option value="{{ $provinsi->id }}">{{ $provinsi->nama }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="kabupaten_kota_id" class="form-label">City</label>
+                                        <label for="kabupaten_kota_id" class="form-label">Kota</label>
                                         <select class="form-select" id="kabupaten_kota_id" name="kabupaten_kota_id"
                                             required>
-                                            <option value="" disabled selected>Select City</option>
+                                            <option value="" disabled selected>Pilih Kota</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="kecamatan_id" class="form-label">District</label>
+                                        <label for="kecamatan_id" class="form-label">Kecamatan</label>
                                         <select class="form-select" id="kecamatan_id" name="kecamatan_id" required>
                                             <option value="" disabled selected>Select District</option>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="kelurahan_id" class="form-label">Sub-district</label>
+                                        <label for="kelurahan_id" class="form-label">Desa</label>
                                         <select class="form-select" id="kelurahan_id" name="kelurahan_id" required>
                                             <option value="" disabled selected>Select Sub-district</option>
                                         </select>
@@ -208,16 +208,16 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="alamat" class="form-label">Address</label>
+                                    <label for="alamat" class="form-label">Alamat Lengkap</label>
                                     <textarea class="form-control" id="alamat" name="alamat" rows="2"
-                                        placeholder="Enter your full address" required></textarea>
+                                        placeholder="Masukan Alamat Lengkap Anda" required></textarea>
                                         <div class="error-alamat invalid-feedback"></div>
                                 </div>
 
                                 <!-- Navigation buttons -->
                                 <div class="d-flex justify-content-between">
-                                    <button class="btn btn-primary btn-prev" type="button">Previous</button>
-                                    <button class="btn btn-primary btn-next" type="button">Next</button>
+                                    <button class="btn btn-primary btn-prev" type="button">Kembali</button>
+                                    <button class="btn btn-primary btn-next" type="button">Lanjut</button>
                                 </div>
                             </form>
                         </div>
@@ -226,36 +226,34 @@
                         <div id="form-step-3"
                             class="tab-pane form-step fade border border-primary rounded shadow-lg p-3 d-none"
                             role="tabpanel" aria-labelledby="form-step-3-tab">
-                            <h3>Business Information</h3>
+                            <h3>Informasi Usaha/UMKM</h3>
                             <form id="umkmForm" class="needs-validation" novalidate>
                                 <div class="mb-3">
-                                    <label for="nama_usaha" class="form-label">Business Name</label>
+                                    <label for="nama_usaha" class="form-label">Nama Usaha</label>
                                     <input type="text" class="form-control" id="nama_usaha" name="nama_usaha"
-                                        placeholder="Enter your business name" required>
-                                    <small class="form-text text-muted">Please provide your business's official
-                                        name.</small>
+                                        placeholder="Masukan Nama Usaha Anda" required>
+                                    <small class="form-text text-muted">Harap berikan nama resmi bisnis Anda.</small>
                                         <div class="error-alamat invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="nib" class="form-label">NIB (Optional)</label>
                                     <input type="text" class="form-control" id="nib" name="nib"
-                                        placeholder="Enter NIB if available">
+                                        placeholder="Masukkan NIB jika Ada">
                                         <div class="error-nib invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="deskripsi_usaha" class="form-label">Business Description</label>
+                                    <label for="deskripsi_usaha" class="form-label">Deskripsi Bisnis</label>
                                     <textarea class="form-control" id="deskripsi_usaha" name="deskripsi_usaha" rows="3"
-                                        placeholder="Describe your business" required></textarea>
-                                    <small class="form-text text-muted">Provide a brief description of your
-                                        business.</small>
+                                        placeholder="Jelaskan bisnis Anda" required></textarea>
+                                    <small class="form-text text-muted">Berikan deskripsi singkat tentang bisnis Anda.</small>
                                         <div class="error-deskripsi_usaha invalid-feedback"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="umkm_category_id" class="form-label">Business Category</label>
+                                        <label for="umkm_category_id" class="form-label">Kategori Usaha</label>
                                         <select class="form-select" id="umkm_category_id" name="umkm_category_id"
                                             required>
-                                            <option value="" disabled selected>Select Business Category</option>
+                                            <option value="" disabled selected>Pilih Kategori Usaha</option>
                                             @foreach($umkmCategories as $category)
                                             <option value="{{ $category->id }}">{{ $category->nama }}</option>
                                             @endforeach
@@ -263,43 +261,43 @@
                                         <div class="error-umkm_category_id invalid-feedback"></div>
                                     </div>
                                     <div class="col-md mb-3">
-                                        <label for="tanggal_berdiri" class="form-label">Establishment Date</label>
+                                        <label for="tanggal_berdiri" class="form-label">Tanggal Berdiri</label>
                                         <input type="date" class="form-control" id="tanggal_berdiri"
                                             name="tanggal_berdiri" required>
                                             <div class="error-tanggal_berdiri invalid-feedback"></div>
                                     </div>
                                 </div>
                                 <hr class="my-3">
-                                <h4 class="mb-2">Business Locations</h4>
+                                <h4 class="mb-2">Lokasi Usaha</h4>
                                 <div class="row">
                                     <div class="col-md mb-3">
-                                        <label for="provinsi_id" class="form-label">Province</label>
+                                        <label for="provinsi_id" class="form-label">Provinsi</label>
                                         <select class="form-select" id="umkm_provinsi_id" name="provinsi_id" required>
-                                            <option value="" disabled selected>Select Province</option>
+                                            <option value="" disabled selected>Pilih Provinsi</option>
                                             @foreach($provinsis as $provinsi)
                                             <option value="{{ $provinsi->id }}">{{ $provinsi->nama }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md mb-3">
-                                        <label for="umkm_kabupaten_kota_id" class="form-label">Regency/City</label>
+                                        <label for="umkm_kabupaten_kota_id" class="form-label">Kota</label>
                                         <select class="form-select" id="umkm_kabupaten_kota_id" name="kabupaten_kota_id"
                                             required>
-                                            <option value="" disabled selected>Select Regency/City</option>
+                                            <option value="" disabled selected>Pilih Kota</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md mb-3">
-                                        <label for="umkm_kecamatan_id" class="form-label">District</label>
+                                        <label for="umkm_kecamatan_id" class="form-label">Kecamatan</label>
                                         <select class="form-select" id="umkm_kecamatan_id" name="kecamatan_id" required>
-                                            <option value="" disabled selected>Select District</option>
+                                            <option value="" disabled selected>Pilih Kecamatan</option>
                                         </select>
                                     </div>
                                     <div class="col-md mb-3">
-                                        <label for="umkm_kelurahan_id" class="form-label">Subdistrict</label>
+                                        <label for="umkm_kelurahan_id" class="form-label">Desa</label>
                                         <select class="form-select" id="umkm_kelurahan_id" name="kelurahan_id" required>
-                                            <option value="" disabled selected>Select Subdistrict</option>
+                                            <option value="" disabled selected>Pilih Desa</option>
                                         </select>
                                     </div>
                                     <div class="col-md mb-3">
@@ -316,16 +314,16 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="alamat_usaha" class="form-label">Business Address</label>
+                                    <label for="alamat_usaha" class="form-label">Alamat Usaha</label>
                                     <textarea class="form-control" id="alamat_usaha" name="alamat_usaha"
-                                        placeholder="Enter your business address" maxlength="100" required></textarea>
+                                        placeholder="Masukkan alamat usaha Anda" maxlength="100" required></textarea>
                                         <div class="error-alamat_usaha invalid-feedback"></div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="koordinat_usaha" class="form-label">Business Coordinates (Google
+                                    <label for="koordinat_usaha" class="form-label">Link Alamat Usaha (Google
                                         Maps)</label>
                                     <input type="text" class="form-control" id="kordinat_usaha" name="kordinat_usaha"
-                                        placeholder="Paste Google Maps link here" required>
+                                        placeholder="Tempel tautan Google Maps di sini" required>
                                         <div class="error-kordinat_usaha invalid-feedback"></div>
                                 </div>
 
@@ -335,49 +333,49 @@
                                 <h4>Financial Data</h4>
 
                                 <div class="mb-3">
-                                    <label for="modal_usaha" class="form-label">Business Capital</label>
+                                    <label for="modal_usaha" class="form-label">Modal Usaha</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp.</span>
                                         <input type="text" class="form-control rupiah-input" id="modal_usaha" name="modal_usaha"
-                                            placeholder="Enter your business capital" required>
+                                            placeholder="Masukkan modal usaha Anda" required>
                                             <div class="error-modal_usaha invalid-feedback"></div>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="asset_usaha" class="form-label">Business Assets</label>
+                                    <label for="asset_usaha" class="form-label">Aset Usaha</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp.</span>
                                         <input type="text" class="form-control rupiah-input" id="asset_usaha" name="asset_usaha"
-                                            placeholder="Enter your business assets" required>
+                                            placeholder="Masukan nominal aset usaha Anda" required>
                                             <div class="error-asset_usaha invalid-feedback"></div>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="penghasilan_bulanan" class="form-label">Monthly Income</label>
+                                    <label for="penghasilan_bulanan" class="form-label">Pendapatan Bulanan</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp.</span>
                                         <input type="text" class="form-control rupiah-input" id="penghasilan_bulanan" name="penghasilan_bulanan"
-                                            placeholder="Enter your monthly income" required>
+                                            placeholder="Masukan pendapatan bulanan Anda" required>
                                             <div class="error-penghasilan_bulanan invalid-feedback"></div>
                                     </div>
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="penghasilan_tahunan" class="form-label">Annual Income</label>
+                                    <label for="penghasilan_tahunan" class="form-label">Perdapatan Tahunan</label>
                                     <div class="input-group">
                                         <span class="input-group-text">Rp.</span>
                                         <input type="text" class="form-control rupiah-input" id="penghasilan_tahunan" name="penghasilan_tahunan"
-                                            placeholder="Enter your annual income" required>
+                                            placeholder="Masukkan pendapatan tahunan Anda" required>
                                             <div class="error-penghasilan_tahunan invalid-feedback"></div>
                                     </div>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="jumlah_tenaga_kerja" class="form-label">Number of Employees</label>
+                                    <label for="jumlah_tenaga_kerja" class="form-label">Jumlah karyawan</label>
                                     <input type="number" class="form-control" id="jumlah_tenaga_kerja"
-                                        name="jumlah_tenaga_kerja" placeholder="Enter the number of employees" min="0"
+                                        name="jumlah_tenaga_kerja" placeholder="Masukkan jumlah karyawan Anda" min="0"
                                         required>
                                         <div class="error-jumlah_tenaga_kerja invalid-feedback"></div>
                                 </div>
@@ -398,7 +396,7 @@
                                     <h2 class="mt-0">
                                         <i class="mdi mdi-check-all"></i>
                                     </h2>
-                                    <h3 class="mt-0">Thank you !</h3>
+                                    <h3 class="mt-0">Terimakasih !</h3>
 
                                     <p class="mb-2">Anda telah berhasil melengkapi data UMKM Anda. Data yang Anda
                                         masukkan akan digunakan untuk proses verifikasi dan pendaftaran UMKM di sistem
@@ -408,17 +406,16 @@
                                     <div class="mb-3">
                                         <div class="form-check d-inline-block mb-3">
                                             <input type="checkbox" class="form-check-input" id="agree" required>
-                                            <label class="form-check-label" for="agree">I agree with the terms and
-                                                conditions</label>
-                                            <div class="invalid-feedback">You must agree before submitting.</div>
+                                            <label class="form-check-label" for="agree">Saya setuju dengan syarat dan ketentuan</label>
+                                            <div class="invalid-feedback">Anda harus setuju sebelum mengirimkan.</div>
                                         </div>
                                     </div>
 
                                 </div>
 
                                 <div class="d-flex justify-content-between">
-                                    <button class="btn btn-primary btn-prev" type="button">Back to Form</button>
-                                    <button class="btn btn-success btn-next" type="button">Submit</button>
+                                    <button class="btn btn-primary btn-prev" type="button">Kembali ke Formulir</button>
+                                    <button class="btn btn-success btn-next" type="button">Kirim</button>
                                 </div>
                             </form>
                         </div>
@@ -438,13 +435,13 @@
 <script>
     function confirmClose() {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You want to close this?",
+            title: 'Apa kamu yakin?',
+            text: "Anda ingin menutup ini?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, close it!'
+            confirmButtonText: 'Ya, tutup!'
         }).then((result) => {
             if (result.isConfirmed) {
                     window.location.href = "{{ route('home') }}";
@@ -465,7 +462,38 @@
     let isDropdownSetup = false;  
     let isDropdownSetupforUmkm =  false;
 
+    // Fungsi untuk memformat angka ke format rupiah
+    function formatRupiah(angka) {
+        let number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
+        if (ribuan) {
+            let separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        return split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+    }
+
+    // Fungsi untuk menghapus format rupiah (pemisah titik) sebelum submit
+    function cleanRupiah(angka) {
+        return angka.replace(/\./g, '');  // Hapus semua titik dari angka
+    }
+
+    // Fungsi untuk mengaplikasikan format ketika user mengetik
+    function applyRupiahFormat(element) {
+        element.addEventListener('input', function(e) {
+            e.target.value = formatRupiah(e.target.value);
+        });
+    }
+
+    // Terapkan format pada semua input yang memerlukan format rupiah
+    document.querySelectorAll('.rupiah-input').forEach(function(input) {
+        applyRupiahFormat(input);
+    });
 
     // Event ketika tombol next diklik
     function validateCurrentForm(step) {
@@ -479,6 +507,11 @@
             return false;
         } else {
             form.classList.remove('was-validated');
+            if (step === 3) {
+                document.querySelectorAll('.rupiah-input').forEach(function(input) {
+                    input.value = cleanRupiah(input.value);  // Hapus titik-titik dari input rupiah
+                });
+            }
             $.ajax({
                 type: 'POST',
                 url: `/check-step-${step}`,
@@ -751,45 +784,4 @@
 });
 </script>
 
-<script>
-    // Fungsi untuk memformat angka ke format rupiah
-    function formatRupiah(angka) {
-        let number_string = angka.replace(/[^,\d]/g, '').toString(),
-            split = number_string.split(','),
-            sisa = split[0].length % 3,
-            rupiah = split[0].substr(0, sisa),
-            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-        if (ribuan) {
-            let separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
-
-        return split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
-    }
-
-    // Fungsi untuk menghapus format rupiah (pemisah titik) sebelum submit
-    function cleanRupiah(angka) {
-        return angka.replace(/\./g, '');  // Hapus semua titik dari angka
-    }
-
-    // Fungsi untuk mengaplikasikan format ketika user mengetik
-    function applyRupiahFormat(element) {
-        element.addEventListener('input', function(e) {
-            e.target.value = formatRupiah(e.target.value);
-        });
-    }
-
-    // Terapkan format pada semua input yang memerlukan format rupiah
-    document.querySelectorAll('.rupiah-input').forEach(function(input) {
-        applyRupiahFormat(input);
-    });
-
-    // Hapus titik saat form di-submit
-    document.getElementById('financial-form').addEventListener('submit', function(e) {
-        document.querySelectorAll('.rupiah-input').forEach(function(input) {
-            input.value = cleanRupiah(input.value);  // Hapus titik-titik
-        });
-    });
-</script>
 @endsection

@@ -33,7 +33,7 @@ class RegistrationController extends Controller
 
     public function SuccessForm()
     {
-        return view('frontend.newregister.succes');
+        return view('frontend.newregister.success');
     }
 
     public function checkStep($step, Request $request)

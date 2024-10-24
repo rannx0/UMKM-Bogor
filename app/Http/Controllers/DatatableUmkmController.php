@@ -56,8 +56,11 @@ class DatatableUmkmController extends Controller
                         ->where('kecamatan_id', $kecamatan->id)
                         ->with(['kategoriUmkm', 'user.personalData'])
                         ->firstOrFail();
+        
+        $profile = $usaha->user->profile;
+
     
-        return view('frontend.pages.data-umkm.detail-umkm', compact('usaha'));
+        return view('frontend.pages.data-umkm.detail-umkm', compact('usaha', 'profile'));
     }
     
     

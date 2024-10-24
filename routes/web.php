@@ -25,6 +25,7 @@ use App\Http\Controllers\HeroContentController;
 use App\http\Controllers\AboutUsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,24 +54,29 @@ Route::get('/register', [RegistrationController::class, 'showForm'])->name('regi
 // Halaman sukses
 Route::get('/register/success', [RegistrationController::class, 'SuccessForm']);
 
-// Halaman frontend dashboard yang bisa diakses oleh siapa saja
+// Halaman frontend dashboard
 Route::get('/', [DashboardFrontendController::class, 'index'])->name('home');
 
+// Datatable UMKM
 Route::get('/data-umkm', [DatatableUmkmController::class, 'umkmdatatable'])->name('data-umkm');
 Route::get('/data-umkm/{nama_kecamatan}/{id}', [DatatableUmkmController::class, 'showKecamatanUmkm'])->name('kecamatan.umkm');
 Route::get('/data-umkm/{nama_kecamatan}/{nama_usaha}/{id}', [DatatableUmkmController::class, 'showUmkmDetail'])->name('detail.umkm');
 
+// Halaman Dashboard Kirim Contact Message
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 Route::get('/propil', function () {
     return view('frontend.pages.data-umkm.umkm-profile');
 });
+Route::get('/desain-profiluser', function () {
+    return view('frontend.pages.user-profile.index');
+});
 
-// Superadmin Routes - Only accessible by users with 'Superadmin' role
+// 'Superadmin' role
 Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(function () {
     Route::get('/dashboard', [SuperAdminController::class, 'index'])->name('superadmin.dashboard');
     
-    // Admin Management (CRUD for Admins)
+    // Admin Manage
     Route::get('/admins', [AdminManageController::class, 'index'])->name('admins.index');
     Route::get('/admins/create', [AdminManageController::class, 'create'])->name('admins.create');
     Route::post('/admins', [AdminManageController::class, 'store'])->name('admins.store');
@@ -78,7 +84,7 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
     Route::put('/admins/{admin}', [AdminManageController::class, 'update'])->name('admins.update');
     Route::delete('/admins/{admin}', [AdminManageController::class, 'destroy'])->name('admins.destroy');
 
-    // Permissions Management
+    // Permissions Manage
     Route::get('/permissions', [AdminManageController::class, 'listPermissions'])->name('permissions.index');
 
     // Locations Manage
@@ -130,30 +136,37 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
     Route::put('/faqs/{id}', [FaqController::class, 'update'])->name('faqs.update');
     Route::delete('/faqs/{id}', [FaqController::class, 'destroy'])->name('faqs.destroy');
 
-
 });
 
-// Manager Routes - Only for 'Manager' role
+// 'Manager' role 
 Route::prefix('manager')->middleware(['auth', 'role:Manager'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('manager.dashboard');
 });
 
-// Administrator Routes - Only for 'Administrator' role
+// 'User' role
+Route::prefix('user')->middleware(['auth', 'role:User'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('user.dashboard');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+});
+
+// 'Administrator' role
 Route::prefix('administrator')->middleware(['auth', 'role:Administrator'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('administrator.dashboard');
 });
 
-// CEO Routes - Only for 'CEO' role
+// 'CEO' role
 Route::prefix('ceo')->middleware(['auth', 'role:CEO'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('ceo.dashboard');
 });
 
-// UMKM Management Routes - Only for 'UMKM Management' role
+// 'UMKM Management' role
 Route::prefix('umkm-management')->middleware(['auth', 'role:UMKM Management'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('umkm-management.dashboard');
 });
 
-// Configurations Management Routes - Only for 'Configurations Management' role
+// 'Configurations Management' role
 Route::prefix('config-management')->middleware(['auth', 'role:Configurations Management'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('config-management.dashboard');
 });

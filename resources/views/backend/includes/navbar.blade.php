@@ -164,7 +164,7 @@
                     <span class="account-user-name">{{ Auth::user()->name }}</span>
                     <span class="account-position">
                         @if(Auth::user()->roles->isNotEmpty())
-                            {{ Auth::user()->roles->first()->name }}  <!-- Menampilkan role pertama -->
+                            {{ Auth::user()->roles->first()->name }}
                         @else
                             No Role
                         @endif

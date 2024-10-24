@@ -3,39 +3,48 @@
 @section('content')
 <div class="container">
     <h2>Manage About Us Content</h2>
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <form action="{{ route('about.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id" value="{{ $aboutUs->id ?? '' }}">
-    
+
         <!-- Input untuk Title -->
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" name="title" class="form-control" value="{{ old('title', $aboutUs->title ?? '') }}" required>
+            <input type="text" name="title" class="form-control" value="{{ old('title', $aboutUs->title ?? '') }}"
+                required>
         </div>
-    
+
         <!-- Input untuk Description -->
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" class="form-control" rows="3" required>{{ old('description', $aboutUs->description ?? '') }}</textarea>
+            <textarea name="description" class="form-control" rows="3"
+                required>{{ old('description', $aboutUs->description ?? '') }}</textarea>
         </div>
-    
+
         <!-- Input Focus Points Dinamis -->
         <div class="mb-3">
             <label for="focus_points" class="form-label">Focus Points</label>
             <div id="focus-points-container">
                 @php
-                    // Decode focus_points dari JSON ke array
-                    $focusPoints = json_decode($aboutUs->focus_points ?? '[]', true);
+                // Decode focus_points dari JSON ke array
+                $focusPoints = json_decode($aboutUs->focus_points ?? '[]', true);
                 @endphp
-    
+
                 <!-- Loop untuk menampilkan focus points yang sudah ada -->
                 @foreach($focusPoints as $focusPoint)
                 <div class="input-group mb-2">
-                    <input type="text" name="focus_points[]" class="form-control" value="{{ $focusPoint }}" placeholder="Enter focus point">
+                    <input type="text" name="focus_points[]" class="form-control" value="{{ $focusPoint }}"
+                        placeholder="Enter focus point">
                     <button type="button" class="btn btn-danger btn-remove-focus-point">Hapus</button>
                 </div>
                 @endforeach
-    
+
                 <!-- Input focus point pertama jika tidak ada data -->
                 @if(empty($focusPoints))
                 <div class="input-group mb-2">
@@ -46,22 +55,24 @@
             </div>
             <button type="button" class="btn btn-sm btn-success" id="add-focus-point">Tambah Focus Point</button>
         </div>
-    
+
         <!-- Input untuk Commitment -->
         <div class="mb-3">
             <label for="commitment" class="form-label">Commitment</label>
-            <textarea name="commitment" class="form-control" rows="2">{{ old('commitment', $aboutUs->commitment ?? '') }}</textarea>
+            <textarea name="commitment" class="form-control"
+                rows="2">{{ old('commitment', $aboutUs->commitment ?? '') }}</textarea>
         </div>
-    
+
         <!-- Input untuk Image -->
         <div class="mb-3">
             <label for="image" class="form-label">Image</label>
             <input type="file" name="image" class="form-control">
             @if($aboutUs->image)
-            <img src="{{ Storage::url('public/about-us/'.$aboutUs->image) }}" class="img-fluid mt-2" alt="About Us Image" style="max-width: 200px;">
+            <img src="{{ Storage::url('public/about-us/'.$aboutUs->image) }}" class="img-fluid mt-2"
+                alt="About Us Image" style="max-width: 200px;">
             @endif
         </div>
-    
+
         <!-- Submit Button -->
         <button type="submit" class="btn btn-primary">Simpan</button>
     </form>
