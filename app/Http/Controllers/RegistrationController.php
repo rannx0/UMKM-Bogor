@@ -120,6 +120,7 @@ class RegistrationController extends Controller
                 'name' => $accountData['name'],
                 'email' => $accountData['email'],
                 'password' => Hash::make($accountData['password']),
+                'is_approved' => false,
             ]);
 
             $user->assignRole('User');

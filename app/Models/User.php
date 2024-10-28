@@ -7,15 +7,19 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasRoles, HasApiTokens, HasFactory, Notifiable;
+    use HasRoles, HasApiTokens, HasFactory, Notifiable, SoftDeletes; 
 
     protected $fillable = [
         'name',
         'email',
         'password',
+        'approved_at',
+        'rejected_at',
+        'rejection_reason',
     ];
 
     protected $hidden = [
@@ -25,7 +29,15 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'approved_at' => 'datetime',
+        'rejected_at' => 'datetime',
     ];
+
+    public function showTrashed()
+    {
+        $trashedUsers = User::onlyTrashed()->get(); // Mendapatkan pengguna yang dihapus
+        return view('backend.superadmin.user-approval.trashed', compact('trashedUsers'));
+    }
 
     public function personalData()
     {

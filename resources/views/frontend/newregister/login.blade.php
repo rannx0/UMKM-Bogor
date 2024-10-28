@@ -8,8 +8,8 @@
         <div class="col-xxl-4 col-lg-5">
             <div class="card shadow-lg">
                 <!-- Tombol Kembali di Pojok Kiri Atas -->
-                <a href="{{ route('home') }}" class="btn btn-outline-dark btn-sm position-absolute top-0 start-0 m-3 shadow-sm">
-                    <i class="mdi mdi-arrow-left"></i> Back to Home
+                <a href="{{ route('home') }}" class="text-dark position-absolute top-0 start-0 m-3">
+                    <i class="mdi mdi-arrow-left"></i> Kembali
                 </a>
                 
                 <!-- Animasi fadeInUp -->

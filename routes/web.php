@@ -26,6 +26,10 @@ use App\http\Controllers\AboutUsController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserApprovalController;
+
+use App\Mail\UserApprovedMail;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +41,21 @@ use App\Http\Controllers\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/test-email', function () {
+    // Temukan user yang akan menerima email (pastikan ID-nya ada di database)
+    $user = \App\Models\User::find(38); // Ganti dengan ID user yang valid
+
+    if (!$user) {
+        return 'User tidak ditemukan.';
+    }
+
+    // Kirim email persetujuan sebagai tes
+    Mail::to($user->email)->send(new UserApprovedMail($user));
+
+    return 'Email telah dikirim';
+});
+
 
 // Login Routes
 Route::get('/gw5t', [AuthController::class, 'showLoginForm'])->name('login');
@@ -97,9 +116,9 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
     // UMKM Category
     Route::resource('umkm-categories', UmkmCategoryController::class);
 
-    // User list
-    Route::get('users', [UserController::class, 'index'])->name('users.list');
-    Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    // // User list
+    // Route::get('users', [UserController::class, 'index'])->name('users.list');
+    // Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 
     // Usaha list
     Route::get('usaha', [UsahaController::class, 'index'])->name('usaha.list');
@@ -109,13 +128,16 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
     Route::get('personal-data', [PersonalDataController::class, 'index'])->name('personal_data.list');
     Route::get('personal-data/{id}', [PersonalDataController::class, 'show'])->name('personal_data.show');
 
-    // User Data
-    Route::get('/userdata', [UserDataController::class, 'index'])->name('userdata.index');
-    Route::get('/userdata/{id}', [UserDataController::class, 'show'])->name('userdata.show');
-    Route::get('/userdata/{id}/personal', [UserDataController::class, 'showPersonalData'])->name('userdata.personalData');
-    Route::get('/userdata/{id}/usaha', [UserDataController::class, 'showUsaha'])->name('userdata.usaha');
-    Route::get('/userdata/{id}/keuangan', [UserDataController::class, 'showKeuangan'])->name('userdata.keuangan');
-
+    // User Data Routes
+    Route::prefix('userdata')->name('userdata.')->group(function () {
+        Route::get('/', [UserDataController::class, 'index'])->name('index');
+        Route::get('/{id}', [UserDataController::class, 'show'])->name('show');
+        Route::get('/{id}/profile', [UserDataController::class, 'showProfile'])->name('profile');
+        Route::get('/{id}/personal', [UserDataController::class, 'showPersonalData'])->name('personalData');
+        Route::get('/{id}/usaha', [UserDataController::class, 'showUsaha'])->name('usaha');
+        Route::get('/{id}/keuangan', [UserDataController::class, 'showKeuangan'])->name('keuangan');
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+    });
     // Configurations
     Route::get('/configuration/{id?}', [ConfigurationControllers::class, 'index'])->name('configuration.index');
     Route::post('/configuration', [ConfigurationControllers::class, 'store'])->name('configuration.store');
@@ -135,6 +157,14 @@ Route::prefix('superadmin')->middleware(['auth', 'role:Superadmin'])->group(func
     Route::get('/faqs/{id}/edit', [FaqController::class, 'edit'])->name('faqs.edit');
     Route::put('/faqs/{id}', [FaqController::class, 'update'])->name('faqs.update');
     Route::delete('/faqs/{id}', [FaqController::class, 'destroy'])->name('faqs.destroy');
+
+    //User Approval
+    Route::get('/user-approval/pending', [UserApprovalController::class, 'index'])->name('user-approval.index');
+    Route::get('/user-approval/approved', [UserApprovalController::class, 'showApproved'])->name('user-approval.approved');
+    Route::get('/user-approval/rejected', [UserApprovalController::class, 'showRejected'])->name('user-approval.rejected');    
+    Route::post('/user-approval/{id}/approve', [UserApprovalController::class, 'approve'])->name('user-approval.approve');
+    Route::post('/user-approval/{id}/reject', [UserApprovalController::class, 'reject'])->name('user-approval.reject');
+    Route::delete('user/{id}', [UserApprovalController::class, 'destroy'])->name('user.destroy');
 
 });
 

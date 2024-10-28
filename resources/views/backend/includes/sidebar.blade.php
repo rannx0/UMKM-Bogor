@@ -75,9 +75,6 @@
                 <div class="collapse" id="sidebarNotification">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="#">New Users</a>
-                        </li>
-                        <li>
                             <a href="#">User Changes</a>
                         </li>
                         <li>
@@ -144,7 +141,7 @@
                 <div class="collapse" id="usermanager">
                     <ul class="side-nav-second-level">
                         <li>
-                            <a href="{{ route('users.list')}}">Users</a>
+                            <a href="{{ route('user-approval.index')}}">New User</a>
                         </li>
                         <li>
                             <a href="{{ route('personal_data.list')}}">Personal Data Users</a>

@@ -13,18 +13,22 @@
                         </h2>
 
                         <!-- Success Message -->
-                        <h3 class="mt-3 font-weight-bold">Registration Successful!</h3>
+                        <h3 class="mt-3 font-weight-bold">Pendaftaran Berhasil!</h3>
                         <p class="w-75 mb-4 mx-auto text-muted">
-                            Terima kasih telah mendaftar. Proses pendaftaran Anda berhasil disimpan. Anda dapat melanjutkan ke halaman login untuk mengakses akun Anda.
+                            Terima kasih telah mendaftar. Proses pendaftaran Anda berhasil disimpan. 
+                            Anda perlu menunggu persetujuan sebelum dapat mengakses akun Anda.
+                        </p>
+                        <p class="w-75 mb-4 mx-auto text-muted">
+                            Silakan periksa email Anda untuk pemberitahuan mengenai status pendaftaran Anda.
                         </p>
 
                         <!-- Action Buttons -->
                         <div class="d-flex justify-content-center gap-3">
                             <a href="{{ url('/') }}" class="btn btn-outline-secondary btn-md rounded px-4">
-                                <i class="mdi mdi-arrow-left"></i> Back to Home
+                                <i class="mdi mdi-arrow-left"></i> Kembali ke Beranda
                             </a>
                             <a href="{{ route('login') }}" class="btn btn-success btn-md rounded px-4">
-                                <i class="mdi mdi-login"></i> Continue to Login
+                                <i class="mdi mdi-login"></i> Lanjut ke Login
                             </a>
                         </div>
                     </div>
